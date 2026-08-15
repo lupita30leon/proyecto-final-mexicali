@@ -1,0 +1,7 @@
+# Archivo generado por el script de preparación
+datos/crimes_mxl_limpio.csv
+
+# Archivos temporales y del sistema
+*.log
+.DS_Store
+Thumbs.db
