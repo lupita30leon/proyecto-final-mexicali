@@ -5,3 +5,6 @@ datos/crimes_mxl_limpio.csv
 *.log
 .DS_Store
 Thumbs.db
+# Archivos temporales de Python
+__pycache__/
+*.pyc
