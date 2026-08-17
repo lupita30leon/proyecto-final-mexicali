@@ -92,31 +92,43 @@ ejecutar_mongo \
   resultados/aplicacion_validador.txt
 
 echo
-echo "9. Probando las reglas de validación"
+echo "9. Reforzando los intervalos geográficos"
+ejecutar_mongo \
+  scripts/reforzar_validador_geografico.js \
+  resultados/refuerzo_validador_geografico.txt
+
+echo
+echo "10. Probando las reglas de validación"
 ejecutar_mongo \
   scripts/probar_validador.js \
   resultados/pruebas_validador.txt
 
 echo
-echo "10. Generando el perfil geoespacial"
+echo "11. Generando el perfil geoespacial"
 ejecutar_mongo \
   scripts/perfil_geoespacial.js \
   resultados/perfil_geoespacial.txt
 
 echo
-echo "11. Ejecutando el análisis geoespacial"
+echo "12. Ejecutando el análisis geoespacial"
 ejecutar_mongo \
   scripts/analisis_geoespacial.js \
   resultados/analisis_geoespacial.txt
 
 echo
-echo "12. Ejecutando el análisis temporal"
+echo "13. Ejecutando las pruebas geográficas adicionales"
+ejecutar_mongo \
+  scripts/pruebas_geograficas_adicionales.js \
+  resultados/pruebas_geograficas_adicionales.txt
+
+echo
+echo "14. Ejecutando el análisis temporal"
 ejecutar_mongo \
   scripts/analisis_temporal.js \
   resultados/analisis_temporal.txt
 
 echo
-echo "13. Ejecutando la comprobación final"
+echo "15. Ejecutando la comprobación final"
 ejecutar_mongo \
   scripts/evidencia_final.js \
   resultados/evidencia_final.txt

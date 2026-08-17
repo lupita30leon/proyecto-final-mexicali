@@ -1,0 +1,25 @@
+Registros procesados: 10000
+Registros procesados: 20000
+Registros procesados: 30000
+Registros procesados: 40000
+Registros procesados: 50000
+Registros procesados: 60000
+Registros procesados: 70000
+Registros procesados: 80000
+Registros procesados: 90000
+Registros procesados: 100000
+Registros procesados: 110000
+Registros procesados: 120000
+Registros procesados: 130000
+Registros procesados: 140000
+Registros procesados: 150000
+Registros procesados: 160000
+Registros procesados: 170000
+
+Carga terminada correctamente.
+Base de datos: m6_nosql
+Colección: delitos_mexicali
+Total de documentos: 175482
+Con ubicación: 140463
+Sin ubicación: 35019
+Sin nombre de lugar: 19

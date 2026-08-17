@@ -118,3 +118,77 @@ Una estructura válida no demuestra que la coordenada sea exacta, vigente o adec
 La aplicación del validador no modifica ni vuelve a evaluar automáticamente todos los documentos existentes. Por ello se conservó también el perfil de calidad previo.
 
 Las reglas representan los requisitos actuales del proyecto. Si la fuente incorpora nuevas clasificaciones o municipios, el dominio deberá revisarse antes de cargar esos documentos.
+
+
+## Validación de intervalos geográficos
+
+El JSON Schema controla la estructura del objeto GeoJSON, el tipo `Point`, la presencia del arreglo `coordinates` y que sus dos elementos sean numéricos.
+
+Adicionalmente, el validador se reforzó mediante reglas de consulta para comprobar los intervalos correspondientes a GeoJSON:
+
+- La longitud debe encontrarse entre -180 y 180.
+- La latitud debe encontrarse entre -90 y 90.
+- Los documentos sin el campo opcional `ubicacion` continúan siendo válidos.
+
+Antes de aplicar estas reglas se comprobó que ninguno de los 140,463 documentos con ubicación estuviera fuera de los intervalos permitidos.
+
+El validador final combina:
+
+```javascript
+{
+  $and: [
+    {
+      $jsonSchema: {
+        // Reglas estructurales del documento.
+      }
+    },
+    {
+      $or: [
+        {
+          ubicacion: {
+            $exists: false
+          }
+        },
+        {
+          $and: [
+            {
+              "ubicacion.coordinates.0": {
+                $gte: -180,
+                $lte: 180
+              }
+            },
+            {
+              "ubicacion.coordinates.1": {
+                $gte: -90,
+                $lte: 90
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+Esta combinación distingue entre la estructura del documento y la validez semántica de los intervalos geográficos.
+
+## Pruebas adicionales de coordenadas
+
+Se agregaron dos casos inválidos para comprobar los límites:
+
+| Caso | Coordenadas | Resultado esperado | Resultado obtenido |
+|---|---|---|---|
+| Longitud fuera del intervalo | `[200, 32.60621895]` | Rechazado | Rechazado |
+| Latitud fuera del intervalo | `[-115.3862048, 95]` | Rechazado | Rechazado |
+
+Ambos documentos fueron rechazados con `Document failed validation`.
+
+Considerando las pruebas originales y las adicionales, se verificaron:
+
+- 2 documentos válidos aceptados.
+- 9 documentos inválidos rechazados.
+- 11 comportamientos coincidentes con el resultado esperado.
+- 0 fallas.
+
+Los mensajes del motor se conservaron como evidencia, pero la explicación de cada resultado se relacionó con la regla específica que fue evaluada.

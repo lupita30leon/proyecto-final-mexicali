@@ -105,10 +105,27 @@ var totalRobosVehiculoCincoKm =
     ? robosVehiculoCincoKm[0].totalRegistros
     : 0;
 
-var validadorConfigurado = Boolean(
-  opciones.validator &&
-  opciones.validator.$jsonSchema
-);
+function contieneJsonSchema(validador) {
+  if (!validador) {
+    return false;
+  }
+
+  if (validador.$jsonSchema) {
+    return true;
+  }
+
+  if (Array.isArray(validador.$and)) {
+    return validador.$and.some(function (regla) {
+      return contieneJsonSchema(regla);
+    });
+  }
+
+  return false;
+}
+
+var validadorConfigurado = contieneJsonSchema(
+  opciones.validator
+);;
 
 var comprobaciones = [
   {

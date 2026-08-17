@@ -102,6 +102,7 @@ proyecto-final-mexicali/
 ├── datos/
 │   └── crimes_mxl.csv
 ├── documentacion/
+│   ├── 00_planteamiento_problema.md
 │   ├── 01_preparacion_datos.md
 │   ├── 02_consultas_iniciales.md
 │   ├── 03_indices_rendimiento.md
@@ -109,18 +110,24 @@ proyecto-final-mexicali/
 │   ├── 05_analisis_geoespacial.md
 │   ├── 06_analisis_temporal.md
 │   ├── 07_seguridad_privacidad.md
-│   └── 08_conclusiones.md
+│   ├── 08_conclusiones.md
+│   └── 09_verificacion_guias.md
 ├── resultados/
+│   ├── preparacion_csv.txt
+│   ├── carga_mongodb.txt
 │   ├── consultas_funcionales.txt
 │   ├── medicion_antes_indices.txt
 │   ├── creacion_indices.txt
 │   ├── medicion_despues_indices.txt
 │   ├── perfil_calidad.txt
 │   ├── aplicacion_validador.txt
+│   ├── refuerzo_validador_geografico.txt
 │   ├── pruebas_validador.txt
 │   ├── perfil_geoespacial.txt
 │   ├── analisis_geoespacial.txt
+│   ├── pruebas_geograficas_adicionales.txt
 │   ├── analisis_temporal.txt
+│   ├── ejecucion_completa.txt
 │   └── evidencia_final.txt
 ├── scripts/
 │   ├── preparar_csv.sh
@@ -131,9 +138,11 @@ proyecto-final-mexicali/
 │   ├── medicion_despues_indices.js
 │   ├── perfil_calidad.js
 │   ├── aplicar_validador.js
+│   ├── reforzar_validador_geografico.js
 │   ├── probar_validador.js
 │   ├── perfil_geoespacial.js
 │   ├── analisis_geoespacial.js
+│   ├── pruebas_geograficas_adicionales.js
 │   ├── analisis_temporal.js
 │   ├── evidencia_final.js
 │   └── ejecutar_proyecto.sh
@@ -143,7 +152,7 @@ proyecto-final-mexicali/
 
 ## Preparación del entorno
 
-El proyecto se desarrolló en AWS Academy Learner Lab utilizando el entorno del curso `m6-nosql`.
+El proyecto se desarrolló en AWS Academy Learner Lab utilizando MongoDB Community 4.4.
 
 Para iniciar MongoDB:
 
@@ -172,11 +181,13 @@ El ejecutor general realiza las actividades en el orden correcto:
 6. Mide nuevamente el rendimiento.
 7. Genera el perfil de calidad.
 8. Aplica el validador.
-9. Ejecuta las pruebas del validador.
-10. Genera el perfil geoespacial.
-11. Ejecuta el análisis de proximidad.
-12. Ejecuta el análisis temporal.
-13. Comprueba el resultado final.
+9. Refuerza los intervalos geográficos del validador.
+10. Ejecuta las pruebas del validador.
+11. Genera el perfil geoespacial.
+12. Ejecuta el análisis de proximidad.
+13. Ejecuta las pruebas geográficas adicionales.
+14. Ejecuta el análisis temporal.
+15. Comprueba el resultado final.
 
 El comando de ejecución es:
 
@@ -265,12 +276,12 @@ Las reglas controlan:
 - Cantidad de coordenadas.
 - Propiedades no definidas.
 
-Se ejecutaron nueve casos de prueba:
+Se ejecutaron once casos de prueba:
 
 | Resultado | Casos |
 |---|---:|
 | Documentos válidos aceptados | 2 |
-| Documentos inválidos rechazados | 7 |
+| Documentos inválidos rechazados | 9 |
 | Resultados diferentes de lo esperado | 0 |
 
 ## Análisis geoespacial
@@ -338,6 +349,7 @@ Resultado general: PROYECTO VERIFICADO CORRECTAMENTE
 
 La explicación detallada de cada etapa se encuentra en:
 
+- [Planteamiento del problema](documentacion/00_planteamiento_problema.md)
 - [Preparación y carga de datos](documentacion/01_preparacion_datos.md)
 - [Consultas iniciales](documentacion/02_consultas_iniciales.md)
 - [Índices y rendimiento](documentacion/03_indices_rendimiento.md)
@@ -346,6 +358,7 @@ La explicación detallada de cada etapa se encuentra en:
 - [Análisis temporal](documentacion/06_analisis_temporal.md)
 - [Seguridad y privacidad](documentacion/07_seguridad_privacidad.md)
 - [Conclusiones](documentacion/08_conclusiones.md)
+- [Verificación de las guías](documentacion/09_verificacion_guias.md)
 
 ## Seguridad y privacidad
 

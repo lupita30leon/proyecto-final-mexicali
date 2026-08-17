@@ -80,7 +80,7 @@ Varios documentos presentaron una distancia de cero metros porque comparten exac
 
 Antes de crear índices especializados, las dos consultas evaluadas utilizaron `COLLSCAN` y examinaron los 175,482 documentos de la colección.
 
-La consulta de robos de vehículo durante 2023 tardó 89 milisegundos y la consulta de Valle del Pedregal tardó 91 milisegundos.
+La consulta de robos de vehículo durante 2023 tardó 92 milisegundos y la consulta de Valle del Pedregal también tardó 92 milisegundos.
 
 Después de crear los índices compuestos, MongoDB utilizó `IXSCAN`.
 
@@ -103,7 +103,7 @@ El validador controla:
 - La cantidad de coordenadas.
 - La ausencia de propiedades no definidas.
 
-Se ejecutaron nueve casos de prueba. Dos documentos válidos fueron aceptados y siete documentos inválidos fueron rechazados. Los nueve resultados coincidieron con el comportamiento esperado.
+Se ejecutaron once casos de prueba. Dos documentos válidos fueron aceptados y nueve documentos inválidos fueron rechazados. Los once resultados coincidieron con el comportamiento esperado.
 
 Los campos `lugar.nombre`, `lugar.tipo` y `ubicacion` se conservaron como opcionales debido a que existen documentos reales donde esos valores no están disponibles.
 

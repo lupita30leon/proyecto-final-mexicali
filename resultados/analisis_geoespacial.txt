@@ -38,7 +38,7 @@
 === DIEZ REGISTROS MÁS CERCANOS ===
 [
 	{
-		"_id" : ObjectId("6a7fadb31a330b39d9320f2c"),
+		"_id" : ObjectId("6a8291d6a4a31c6619ed653f"),
 		"clasificacionDelito" : "HOME ROBBERY",
 		"fechaOcurrencia" : ISODate("2014-01-01T02:00:00Z"),
 		"lugar" : {
@@ -56,7 +56,7 @@
 		"distanciaMetros" : 0
 	},
 	{
-		"_id" : ObjectId("6a7fadb31a330b39d9321422"),
+		"_id" : ObjectId("6a8291d6a4a31c6619ed6a35"),
 		"clasificacionDelito" : "HOME ROBBERY",
 		"fechaOcurrencia" : ISODate("2014-01-21T08:30:00Z"),
 		"lugar" : {
@@ -74,7 +74,7 @@
 		"distanciaMetros" : 0
 	},
 	{
-		"_id" : ObjectId("6a7fadb31a330b39d932198f"),
+		"_id" : ObjectId("6a8291d6a4a31c6619ed6fa2"),
 		"clasificacionDelito" : "ROBBERY TO COMMERCE",
 		"fechaOcurrencia" : ISODate("2014-02-11T03:00:00Z"),
 		"lugar" : {
@@ -92,7 +92,7 @@
 		"distanciaMetros" : 0
 	},
 	{
-		"_id" : ObjectId("6a7fadb31a330b39d932233d"),
+		"_id" : ObjectId("6a8291d6a4a31c6619ed7950"),
 		"clasificacionDelito" : "MALICIOUS INJURY",
 		"fechaOcurrencia" : ISODate("2014-03-17T23:30:00Z"),
 		"lugar" : {
@@ -110,7 +110,7 @@
 		"distanciaMetros" : 0
 	},
 	{
-		"_id" : ObjectId("6a7fadb31a330b39d9324ccd"),
+		"_id" : ObjectId("6a8291d6a4a31c6619eda2e0"),
 		"clasificacionDelito" : "VEHICLE THEFT",
 		"fechaOcurrencia" : ISODate("2014-08-23T04:00:00Z"),
 		"lugar" : {
@@ -128,7 +128,7 @@
 		"distanciaMetros" : 0
 	},
 	{
-		"_id" : ObjectId("6a7fadb41a330b39d9329556"),
+		"_id" : ObjectId("6a8291d7a4a31c6619edeb69"),
 		"clasificacionDelito" : "HOME ROBBERY",
 		"fechaOcurrencia" : ISODate("2015-06-16T16:20:00Z"),
 		"lugar" : {
@@ -146,7 +146,7 @@
 		"distanciaMetros" : 0
 	},
 	{
-		"_id" : ObjectId("6a7fadb61a330b39d9334daf"),
+		"_id" : ObjectId("6a8291d9a4a31c6619eea3c2"),
 		"clasificacionDelito" : "ROBBERY WITH VIOLENCE (IN PUBLIC STREETS)",
 		"fechaOcurrencia" : ISODate("2017-09-02T07:05:00Z"),
 		"lugar" : {
@@ -164,7 +164,7 @@
 		"distanciaMetros" : 0
 	},
 	{
-		"_id" : ObjectId("6a7fadb91a330b39d934749c"),
+		"_id" : ObjectId("6a8291dca4a31c6619efcaaf"),
 		"clasificacionDelito" : "VEHICLE THEFT WITH VIOLENCE",
 		"fechaOcurrencia" : ISODate("2023-01-26T19:17:00Z"),
 		"lugar" : {
@@ -182,7 +182,7 @@
 		"distanciaMetros" : 0
 	},
 	{
-		"_id" : ObjectId("6a7fadba1a330b39d934bc1f"),
+		"_id" : ObjectId("6a8291dda4a31c6619f01232"),
 		"clasificacionDelito" : "VEHICLE THEFT",
 		"fechaOcurrencia" : ISODate("2024-09-25T21:00:00Z"),
 		"lugar" : {
@@ -200,7 +200,7 @@
 		"distanciaMetros" : 0
 	},
 	{
-		"_id" : ObjectId("6a7fadba1a330b39d934ba24"),
+		"_id" : ObjectId("6a8291dda4a31c6619f01037"),
 		"clasificacionDelito" : "OTHER NONVIOLENT ROBBERIES",
 		"fechaOcurrencia" : ISODate("2024-09-08T15:21:00Z"),
 		"lugar" : {
@@ -243,7 +243,7 @@
 === CASO DE CONTROL FUERA DE 5 KM ===
 [
 	{
-		"_id" : ObjectId("6a7fadb61a330b39d9333ae9"),
+		"_id" : ObjectId("6a8291d9a4a31c6619ee90fc"),
 		"clasificacionDelito" : "HOME ROBBERY",
 		"lugar" : {
 			"municipio" : "MEXICALI",

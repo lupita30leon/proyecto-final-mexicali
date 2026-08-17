@@ -1,0 +1,14 @@
+=== REVISIÓN PREVIA ===
+{ "documentosFueraDeIntervalo" : 0, "resultadoEsperado" : 0 }
+=== RESULTADO DE COLLMOD ===
+{ "ok" : 1 }
+=== REGLAS GEOGRÁFICAS AGREGADAS ===
+{
+	"longitudMinima" : -180,
+	"longitudMaxima" : 180,
+	"latitudMinima" : -90,
+	"latitudMaxima" : 90,
+	"validationLevel" : "strict",
+	"validationAction" : "error",
+	"validadorCombinado" : true
+}

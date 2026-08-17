@@ -1,0 +1,57 @@
+=== PRUEBA DE LONGITUD ===
+{
+	"nombre" : "Longitud fuera del intervalo",
+	"coordenadas" : [
+		200,
+		32.60621895
+	],
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "La longitud debe estar entre -180 y 180 y la latitud entre -90 y 90.",
+	"mensaje" : "Document failed validation"
+}
+=== PRUEBA DE LATITUD ===
+{
+	"nombre" : "Latitud fuera del intervalo",
+	"coordenadas" : [
+		-115.3862048,
+		95
+	],
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "La longitud debe estar entre -180 y 180 y la latitud entre -90 y 90.",
+	"mensaje" : "Document failed validation"
+}
+=== CONTROL DEL FILTRO TEMÁTICO ===
+{
+	"nombre" : "Registro cercano con clasificación diferente",
+	"documentoControl" : {
+		"_id" : ObjectId("6a8291dca4a31c6619efdb26"),
+		"clasificacionDelito" : "CULPABLE INJURIES",
+		"fechaOcurrencia" : ISODate("2023-06-25T10:44:00Z"),
+		"lugar" : {
+			"municipio" : "MEXICALI",
+			"nombre" : "MIRASOL",
+			"tipo" : "SUBDIVISION"
+		},
+		"ubicacion" : {
+			"type" : "Point",
+			"coordinates" : [
+				-115.3862048,
+				32.60621895
+			]
+		}
+	},
+	"resultadoEsperado" : "EXCLUIDO POR EL FILTRO DE VEHICLE THEFT",
+	"totalCoincidencias" : 0,
+	"coincide" : true
+}
+=== RESUMEN DE PRUEBAS ADICIONALES ===
+{
+	"totalPruebas" : 3,
+	"pruebasCorrectas" : 3,
+	"fallas" : 0,
+	"resultadoGeneral" : "TODAS LAS PRUEBAS COINCIDEN"
+}

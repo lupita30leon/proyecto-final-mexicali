@@ -137,3 +137,62 @@ Este resultado no permite afirmar que MIRASOL sea la zona con mayor riesgo. Para
 - Los conteos espaciales no son tasas.
 - La proximidad no demuestra causalidad.
 - Las ubicaciones se interpretan de manera agregada y no como trayectorias personales.
+
+
+## Comprobación progresiva de la selección espacial
+
+La consulta se construyó progresivamente.
+
+Primero se utilizó `$geoNear` para recuperar los diez documentos más cercanos al punto de referencia sin limitar la clasificación delictiva. Con esto se comprobó:
+
+- Que el índice `2dsphere` estaba disponible.
+- Que las distancias se calcularon en metros.
+- Que los resultados estaban ordenados de menor a mayor distancia.
+- Que todos los documentos mostrados se encontraban dentro del límite de cinco kilómetros.
+
+Después se agregó el filtro temático:
+
+```javascript
+query: {
+  clasificacionDelito: "VEHICLE THEFT"
+}
+```
+
+Finalmente, el subconjunto seleccionado se agrupó para calcular la cantidad de registros, la distancia promedio y la distancia máxima observada.
+
+## Control del filtro temático
+
+Se seleccionó un documento de control ubicado exactamente en el punto de referencia de Mirasol:
+
+```javascript
+{
+  clasificacionDelito: "CULPABLE INJURIES",
+  lugar: {
+    municipio: "MEXICALI",
+    nombre: "MIRASOL",
+    tipo: "SUBDIVISION"
+  },
+  ubicacion: {
+    type: "Point",
+    coordinates: [-115.3862048, 32.60621895]
+  }
+}
+```
+
+El documento se encuentra a una distancia de cero metros respecto del punto de referencia. Por lo tanto, cumple la condición espacial.
+
+Sin embargo, no cumple el filtro temático porque su clasificación es `CULPABLE INJURIES` y no `VEHICLE THEFT`.
+
+Al ejecutar el pipeline geoespacial con el filtro de robo de vehículo, el documento de control presentó cero coincidencias. El comportamiento fue el esperado.
+
+## Resumen de controles geoespaciales
+
+| Caso de control | Condición espacial | Condición temática | Resultado esperado | Resultado obtenido |
+|---|---|---|---|---|
+| Registro de robo de vehículo en Mirasol | Dentro de cinco kilómetros | Cumple `VEHICLE THEFT` | Incluido | Incluido |
+| Registro de lesiones culposas en Mirasol | Dentro de cinco kilómetros | No cumple `VEHICLE THEFT` | Excluido | Excluido |
+| Registro en Pórticos del Valle a 5,032.37 metros | Fuera de cinco kilómetros | No determina la selección | Excluido | Excluido |
+
+Estos controles demuestran que la proximidad y la clasificación delictiva cumplen funciones diferentes dentro de la consulta.
+
+La ubicación determina si el documento se encuentra dentro del radio establecido, mientras que el filtro temático determina si pertenece a la clasificación que se desea analizar.

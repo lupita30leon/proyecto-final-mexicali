@@ -1,0 +1,1429 @@
+    MongoDB ya está activo en 127.0.0.1:27017.
+========================================
+RECONSTRUCCIÓN DEL PROYECTO
+========================================
+
+1. Preparando el archivo CSV
+Archivo limpio creado correctamente:
+/mnt/vocwork2/work/eee_W_6522809/asn5570907_1/asn5570908_1/work/proyecto-final-mexicali/datos/crimes_mxl_limpio.csv
+Cantidad de líneas:
+175483 /mnt/vocwork2/work/eee_W_6522809/asn5570907_1/asn5570908_1/work/proyecto-final-mexicali/datos/crimes_mxl_limpio.csv
+Encabezado:
+CRIME_CLASSIFICATION,CRIME_SCENE,REGISTRATION_DATE,OCCURRED_DATE,CRIME_TIME,MUNICIPALITY,TYPE,X,Y
+
+2. Cargando y transformando los datos
+Registros procesados: 10000
+Registros procesados: 20000
+Registros procesados: 30000
+Registros procesados: 40000
+Registros procesados: 50000
+Registros procesados: 60000
+Registros procesados: 70000
+Registros procesados: 80000
+Registros procesados: 90000
+Registros procesados: 100000
+Registros procesados: 110000
+Registros procesados: 120000
+Registros procesados: 130000
+Registros procesados: 140000
+Registros procesados: 150000
+Registros procesados: 160000
+Registros procesados: 170000
+
+Carga terminada correctamente.
+Base de datos: m6_nosql
+Colección: delitos_mexicali
+Total de documentos: 175482
+Con ubicación: 140463
+Sin ubicación: 35019
+Sin nombre de lugar: 19
+
+3. Ejecutando consultas funcionales
+
+Ejecutando: scripts/consultas_funcionales.js
+=== CONSULTA 1: CLASIFICACIONES MÁS FRECUENTES ===
+[
+	{
+		"totalRegistros" : 37331,
+		"clasificacionDelito" : "VEHICLE THEFT"
+	},
+	{
+		"totalRegistros" : 27816,
+		"clasificacionDelito" : "HOME ROBBERY"
+	},
+	{
+		"totalRegistros" : 26985,
+		"clasificacionDelito" : "OTHER NONVIOLENT ROBBERIES"
+	},
+	{
+		"totalRegistros" : 20977,
+		"clasificacionDelito" : "MALICIOUS INJURY"
+	},
+	{
+		"totalRegistros" : 18277,
+		"clasificacionDelito" : "ROBBERY WITH VIOLENCE TO COMMERCE"
+	},
+	{
+		"totalRegistros" : 10420,
+		"clasificacionDelito" : "SIMPLE THEFT (ON PUBLIC ROADS)"
+	},
+	{
+		"totalRegistros" : 9914,
+		"clasificacionDelito" : "ROBBERY WITH VIOLENCE (IN PUBLIC STREETS)"
+	},
+	{
+		"totalRegistros" : 7228,
+		"clasificacionDelito" : "ROBBERY TO COMMERCE"
+	},
+	{
+		"totalRegistros" : 5930,
+		"clasificacionDelito" : "CULPABLE INJURIES"
+	},
+	{
+		"totalRegistros" : 3790,
+		"clasificacionDelito" : "OTHER ROBBERIES WITH VIOLENCE"
+	}
+]
+=== CONSULTA 2: REGISTROS POR AÑO ===
+[
+	{
+		"totalRegistros" : 24480,
+		"anio" : 2014
+	},
+	{
+		"totalRegistros" : 22743,
+		"anio" : 2015
+	},
+	{
+		"totalRegistros" : 20466,
+		"anio" : 2016
+	},
+	{
+		"totalRegistros" : 20030,
+		"anio" : 2017
+	},
+	{
+		"totalRegistros" : 16114,
+		"anio" : 2018
+	},
+	{
+		"totalRegistros" : 14204,
+		"anio" : 2019
+	},
+	{
+		"totalRegistros" : 11749,
+		"anio" : 2020
+	},
+	{
+		"totalRegistros" : 12672,
+		"anio" : 2021
+	},
+	{
+		"totalRegistros" : 13912,
+		"anio" : 2022
+	},
+	{
+		"totalRegistros" : 10348,
+		"anio" : 2023
+	},
+	{
+		"totalRegistros" : 8764,
+		"anio" : 2024
+	}
+]
+=== CONSULTA 3: REGISTROS POR HORA ===
+[
+	{
+		"totalRegistros" : 11895,
+		"hora" : 12
+	},
+	{
+		"totalRegistros" : 11533,
+		"hora" : 8
+	},
+	{
+		"totalRegistros" : 9140,
+		"hora" : 10
+	},
+	{
+		"totalRegistros" : 8725,
+		"hora" : 0
+	},
+	{
+		"totalRegistros" : 8510,
+		"hora" : 20
+	},
+	{
+		"totalRegistros" : 8426,
+		"hora" : 21
+	},
+	{
+		"totalRegistros" : 7994,
+		"hora" : 18
+	},
+	{
+		"totalRegistros" : 7692,
+		"hora" : 19
+	},
+	{
+		"totalRegistros" : 7679,
+		"hora" : 7
+	},
+	{
+		"totalRegistros" : 7562,
+		"hora" : 22
+	},
+	{
+		"totalRegistros" : 7187,
+		"hora" : 15
+	},
+	{
+		"totalRegistros" : 7181,
+		"hora" : 17
+	},
+	{
+		"totalRegistros" : 7034,
+		"hora" : 9
+	},
+	{
+		"totalRegistros" : 6859,
+		"hora" : 16
+	},
+	{
+		"totalRegistros" : 6611,
+		"hora" : 23
+	},
+	{
+		"totalRegistros" : 6602,
+		"hora" : 11
+	},
+	{
+		"totalRegistros" : 6501,
+		"hora" : 14
+	},
+	{
+		"totalRegistros" : 6485,
+		"hora" : 6
+	},
+	{
+		"totalRegistros" : 6325,
+		"hora" : 13
+	},
+	{
+		"totalRegistros" : 5452,
+		"hora" : 5
+	},
+	{
+		"totalRegistros" : 5436,
+		"hora" : 3
+	},
+	{
+		"totalRegistros" : 5134,
+		"hora" : 4
+	},
+	{
+		"totalRegistros" : 4787,
+		"hora" : 1
+	},
+	{
+		"totalRegistros" : 4732,
+		"hora" : 2
+	}
+]
+=== CONSULTA 4: LUGARES CON MÁS ROBOS DE VEHÍCULO ===
+[
+	{
+		"totalRegistros" : 968,
+		"lugar" : "INDEPENDENCIA"
+	},
+	{
+		"totalRegistros" : 899,
+		"lugar" : "GONZALEZ ORTEGA"
+	},
+	{
+		"totalRegistros" : 847,
+		"lugar" : "NUEVA"
+	},
+	{
+		"totalRegistros" : 824,
+		"lugar" : "VALLE DEL PEDREGAL"
+	},
+	{
+		"totalRegistros" : 737,
+		"lugar" : "CENTRO CIVICO"
+	},
+	{
+		"totalRegistros" : 711,
+		"lugar" : "PRIMERA SECCION"
+	},
+	{
+		"totalRegistros" : 618,
+		"lugar" : "NUEVO MEXICALI"
+	},
+	{
+		"totalRegistros" : 522,
+		"lugar" : "VALLE DE PUEBLA"
+	},
+	{
+		"totalRegistros" : 505,
+		"lugar" : "HIDALGO"
+	},
+	{
+		"totalRegistros" : 463,
+		"lugar" : "PROHOGAR"
+	}
+]
+
+4. Midiendo el rendimiento antes de crear índices
+
+Ejecutando: scripts/medicion_antes_indices.js
+=== MEDICIÓN ANTES DE CREAR ÍNDICES ===
+CONSULTA A: VEHICLE THEFT DURANTE 2023
+{
+	"etapas" : [
+		"PROJECTION_SIMPLE",
+		"SORT",
+		"COLLSCAN"
+	],
+	"nReturned" : 20,
+	"totalKeysExamined" : 0,
+	"totalDocsExamined" : 175482,
+	"executionTimeMillis" : 92,
+	"cantidadResultadosGuardados" : 20,
+	"primeraFecha" : ISODate("2023-12-31T23:30:00Z"),
+	"ultimaFecha" : ISODate("2023-12-29T14:00:00Z"),
+	"idsResultados" : [
+		"6a8291dda4a31c6619efeff1",
+		"6a8291dda4a31c6619efefe4",
+		"6a8291dda4a31c6619efefea",
+		"6a8291dda4a31c6619efefe1",
+		"6a8291dda4a31c6619eff007",
+		"6a8291dda4a31c6619efefe0",
+		"6a8291dda4a31c6619eff012",
+		"6a8291dda4a31c6619efefe3",
+		"6a8291dda4a31c6619efefe5",
+		"6a8291dda4a31c6619efefe2",
+		"6a8291dda4a31c6619efefcf",
+		"6a8291dda4a31c6619efefd8",
+		"6a8291dda4a31c6619efefd9",
+		"6a8291dda4a31c6619efefe6",
+		"6a8291dda4a31c6619efefd4",
+		"6a8291dda4a31c6619efefd7",
+		"6a8291dda4a31c6619efefd2",
+		"6a8291dda4a31c6619efefd3",
+		"6a8291dda4a31c6619efefb3",
+		"6a8291dda4a31c6619efefc7"
+	]
+}
+CONSULTA B: VALLE DEL PEDREGAL ENTRE 2020 Y 2024
+{
+	"etapas" : [
+		"PROJECTION_DEFAULT",
+		"SORT",
+		"COLLSCAN"
+	],
+	"nReturned" : 20,
+	"totalKeysExamined" : 0,
+	"totalDocsExamined" : 175482,
+	"executionTimeMillis" : 92,
+	"cantidadResultadosGuardados" : 20,
+	"primeraFecha" : ISODate("2024-09-30T11:30:00Z"),
+	"ultimaFecha" : ISODate("2024-08-21T13:10:00Z"),
+	"idsResultados" : [
+		"6a8291dda4a31c6619f012b4",
+		"6a8291dda4a31c6619f0127a",
+		"6a8291dda4a31c6619f01251",
+		"6a8291dda4a31c6619f0124f",
+		"6a8291dda4a31c6619f011e5",
+		"6a8291dda4a31c6619f0112b",
+		"6a8291dda4a31c6619f01222",
+		"6a8291dda4a31c6619f01250",
+		"6a8291dda4a31c6619f0116a",
+		"6a8291dda4a31c6619f01025",
+		"6a8291dda4a31c6619f01011",
+		"6a8291dda4a31c6619f01080",
+		"6a8291dda4a31c6619f00fa1",
+		"6a8291dda4a31c6619f01002",
+		"6a8291dda4a31c6619f00f3a",
+		"6a8291dda4a31c6619f00fc4",
+		"6a8291dda4a31c6619f00e6c",
+		"6a8291dda4a31c6619f00e53",
+		"6a8291dda4a31c6619f00e54",
+		"6a8291dda4a31c6619f00e0c"
+	]
+}
+=== ÍNDICES DISPONIBLES ===
+[ { "v" : 2, "key" : { "_id" : 1 }, "name" : "_id_" } ]
+
+5. Creando índices compuestos
+
+Ejecutando: scripts/crear_indices.js
+=== ÍNDICES ANTES DE LA CREACIÓN ===
+[ { "v" : 2, "key" : { "_id" : 1 }, "name" : "_id_" } ]
+=== CREACIÓN DEL ÍNDICE A ===
+[object BSON]
+=== CREACIÓN DEL ÍNDICE B ===
+[object BSON]
+=== ÍNDICES DESPUÉS DE LA CREACIÓN ===
+[
+	{
+		"v" : 2,
+		"key" : {
+			"_id" : 1
+		},
+		"name" : "_id_"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"clasificacionDelito" : 1,
+			"fechaOcurrencia" : -1,
+			"_id" : 1
+		},
+		"name" : "idx_clasificacion_fecha_id"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"lugar.nombre" : 1,
+			"fechaOcurrencia" : -1,
+			"_id" : 1
+		},
+		"name" : "idx_lugar_fecha_id"
+	}
+]
+
+6. Midiendo el rendimiento después de crear índices
+
+Ejecutando: scripts/medicion_despues_indices.js
+=== MEDICIÓN DESPUÉS DE CREAR ÍNDICES ===
+CONSULTA A: VEHICLE THEFT DURANTE 2023
+{
+	"etapas" : [
+		"LIMIT",
+		"PROJECTION_COVERED",
+		"IXSCAN"
+	],
+	"nReturned" : 20,
+	"totalKeysExamined" : 20,
+	"totalDocsExamined" : 0,
+	"executionTimeMillis" : 0,
+	"cantidadResultadosGuardados" : 20,
+	"primeraFecha" : ISODate("2023-12-31T23:30:00Z"),
+	"ultimaFecha" : ISODate("2023-12-29T14:00:00Z"),
+	"idsResultados" : [
+		"6a8291dda4a31c6619efeff1",
+		"6a8291dda4a31c6619efefe4",
+		"6a8291dda4a31c6619efefea",
+		"6a8291dda4a31c6619efefe1",
+		"6a8291dda4a31c6619eff007",
+		"6a8291dda4a31c6619efefe0",
+		"6a8291dda4a31c6619eff012",
+		"6a8291dda4a31c6619efefe3",
+		"6a8291dda4a31c6619efefe5",
+		"6a8291dda4a31c6619efefe2",
+		"6a8291dda4a31c6619efefcf",
+		"6a8291dda4a31c6619efefd8",
+		"6a8291dda4a31c6619efefd9",
+		"6a8291dda4a31c6619efefe6",
+		"6a8291dda4a31c6619efefd4",
+		"6a8291dda4a31c6619efefd7",
+		"6a8291dda4a31c6619efefd2",
+		"6a8291dda4a31c6619efefd3",
+		"6a8291dda4a31c6619efefb3",
+		"6a8291dda4a31c6619efefc7"
+	]
+}
+CONSULTA B: VALLE DEL PEDREGAL ENTRE 2020 Y 2024
+{
+	"etapas" : [
+		"LIMIT",
+		"PROJECTION_DEFAULT",
+		"FETCH",
+		"IXSCAN"
+	],
+	"nReturned" : 20,
+	"totalKeysExamined" : 20,
+	"totalDocsExamined" : 20,
+	"executionTimeMillis" : 0,
+	"cantidadResultadosGuardados" : 20,
+	"primeraFecha" : ISODate("2024-09-30T11:30:00Z"),
+	"ultimaFecha" : ISODate("2024-08-21T13:10:00Z"),
+	"idsResultados" : [
+		"6a8291dda4a31c6619f012b4",
+		"6a8291dda4a31c6619f0127a",
+		"6a8291dda4a31c6619f01251",
+		"6a8291dda4a31c6619f0124f",
+		"6a8291dda4a31c6619f011e5",
+		"6a8291dda4a31c6619f0112b",
+		"6a8291dda4a31c6619f01222",
+		"6a8291dda4a31c6619f01250",
+		"6a8291dda4a31c6619f0116a",
+		"6a8291dda4a31c6619f01025",
+		"6a8291dda4a31c6619f01011",
+		"6a8291dda4a31c6619f01080",
+		"6a8291dda4a31c6619f00fa1",
+		"6a8291dda4a31c6619f01002",
+		"6a8291dda4a31c6619f00f3a",
+		"6a8291dda4a31c6619f00fc4",
+		"6a8291dda4a31c6619f00e6c",
+		"6a8291dda4a31c6619f00e53",
+		"6a8291dda4a31c6619f00e54",
+		"6a8291dda4a31c6619f00e0c"
+	]
+}
+=== ÍNDICES DISPONIBLES ===
+[
+	{
+		"v" : 2,
+		"key" : {
+			"_id" : 1
+		},
+		"name" : "_id_"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"clasificacionDelito" : 1,
+			"fechaOcurrencia" : -1,
+			"_id" : 1
+		},
+		"name" : "idx_clasificacion_fecha_id"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"lugar.nombre" : 1,
+			"fechaOcurrencia" : -1,
+			"_id" : 1
+		},
+		"name" : "idx_lugar_fecha_id"
+	}
+]
+
+7. Generando el perfil de calidad
+
+Ejecutando: scripts/perfil_calidad.js
+=== PRESENCIA Y TIPOS DE CAMPOS ===
+{
+	"totalDocumentos" : 175482,
+	"sinClasificacionDelito" : 0,
+	"clasificacionesString" : 175482,
+	"sinFechaRegistro" : 0,
+	"fechasRegistroDate" : 175482,
+	"sinFechaOcurrencia" : 0,
+	"fechasOcurrenciaDate" : 175482,
+	"sinLugar" : 0,
+	"sinMunicipio" : 0,
+	"sinNombreLugar" : 19,
+	"sinTipoLugar" : 35019,
+	"conUbicacion" : 140463,
+	"sinUbicacion" : 35019,
+	"ubicacionesPoint" : 140463
+}
+=== DOMINIO DE MUNICIPIO ===
+[ "MEXICALI" ]
+=== DOMINIO DE TIPO DE LUGAR ===
+[ "CITY", "COLONY", "SUBDIVISION" ]
+=== CLASIFICACIONES DELICTIVAS ===
+[
+	"BANK ROBBERY",
+	"CULPABLE INJURIES",
+	"HOME ROBBERY",
+	"HOME ROBBERY WITH VIOLENCE",
+	"HOMICIDE (FEMICIDE)",
+	"HOMICIDE (VIOLENT)",
+	"KIDNAPPING",
+	"MALICIOUS INJURY",
+	"OTHER NONVIOLENT ROBBERIES",
+	"OTHER ROBBERIES WITH VIOLENCE",
+	"ROBBERY TO COMMERCE",
+	"ROBBERY WITH VIOLENCE (IN PUBLIC STREETS)",
+	"ROBBERY WITH VIOLENCE TO COMMERCE",
+	"SIMPLE THEFT (ON PUBLIC ROADS)",
+	"VEHICLE THEFT",
+	"VEHICLE THEFT WITH VIOLENCE"
+]
+=== CANTIDAD DE CLASIFICACIONES ===
+16
+
+8. Aplicando el validador
+
+Ejecutando: scripts/aplicar_validador.js
+=== RESULTADO DE COLLMOD ===
+{ "ok" : 1 }
+=== VALIDADOR CONFIGURADO ===
+{
+	"validator" : {
+		"$jsonSchema" : {
+			"bsonType" : "object",
+			"required" : [
+				"clasificacionDelito",
+				"fechaRegistro",
+				"fechaOcurrencia",
+				"lugar"
+			],
+			"additionalProperties" : false,
+			"properties" : {
+				"_id" : {
+					"bsonType" : "objectId",
+					"description" : "Identificador único generado por MongoDB."
+				},
+				"clasificacionDelito" : {
+					"bsonType" : "string",
+					"enum" : [
+						"BANK ROBBERY",
+						"CULPABLE INJURIES",
+						"HOME ROBBERY",
+						"HOME ROBBERY WITH VIOLENCE",
+						"HOMICIDE (FEMICIDE)",
+						"HOMICIDE (VIOLENT)",
+						"KIDNAPPING",
+						"MALICIOUS INJURY",
+						"OTHER NONVIOLENT ROBBERIES",
+						"OTHER ROBBERIES WITH VIOLENCE",
+						"ROBBERY TO COMMERCE",
+						"ROBBERY WITH VIOLENCE (IN PUBLIC STREETS)",
+						"ROBBERY WITH VIOLENCE TO COMMERCE",
+						"SIMPLE THEFT (ON PUBLIC ROADS)",
+						"VEHICLE THEFT",
+						"VEHICLE THEFT WITH VIOLENCE"
+					],
+					"description" : "Debe ser una de las 16 clasificaciones observadas."
+				},
+				"fechaRegistro" : {
+					"bsonType" : "date",
+					"description" : "Debe almacenarse como BSON Date."
+				},
+				"fechaOcurrencia" : {
+					"bsonType" : "date",
+					"description" : "Debe almacenarse como BSON Date."
+				},
+				"lugar" : {
+					"bsonType" : "object",
+					"required" : [
+						"municipio"
+					],
+					"additionalProperties" : false,
+					"properties" : {
+						"municipio" : {
+							"bsonType" : "string",
+							"enum" : [
+								"MEXICALI"
+							],
+							"description" : "El conjunto corresponde al municipio de Mexicali."
+						},
+						"nombre" : {
+							"bsonType" : "string",
+							"minLength" : 1,
+							"description" : "Es opcional porque falta en 19 documentos."
+						},
+						"tipo" : {
+							"bsonType" : "string",
+							"enum" : [
+								"CITY",
+								"COLONY",
+								"SUBDIVISION"
+							],
+							"description" : "Es opcional porque falta en 35019 documentos."
+						}
+					}
+				},
+				"ubicacion" : {
+					"bsonType" : "object",
+					"required" : [
+						"type",
+						"coordinates"
+					],
+					"additionalProperties" : false,
+					"properties" : {
+						"type" : {
+							"bsonType" : "string",
+							"enum" : [
+								"Point"
+							]
+						},
+						"coordinates" : {
+							"bsonType" : "array",
+							"minItems" : 2,
+							"maxItems" : 2,
+							"items" : {
+								"bsonType" : "double"
+							},
+							"description" : "Coordenadas en orden longitud-latitud."
+						}
+					}
+				}
+			}
+		}
+	},
+	"validationLevel" : "strict",
+	"validationAction" : "error"
+}
+
+9. Reforzando los intervalos geográficos
+
+Ejecutando: scripts/reforzar_validador_geografico.js
+=== REVISIÓN PREVIA ===
+{ "documentosFueraDeIntervalo" : 0, "resultadoEsperado" : 0 }
+=== RESULTADO DE COLLMOD ===
+{ "ok" : 1 }
+=== REGLAS GEOGRÁFICAS AGREGADAS ===
+{
+	"longitudMinima" : -180,
+	"longitudMaxima" : 180,
+	"latitudMinima" : -90,
+	"latitudMaxima" : 90,
+	"validationLevel" : "strict",
+	"validationAction" : "error",
+	"validadorCombinado" : true
+}
+
+10. Probando las reglas de validación
+
+Ejecutando: scripts/probar_validador.js
+=== CREACIÓN DE LA COLECCIÓN DE PRUEBAS ===
+{ "ok" : 1 }
+=== CASOS DE PRUEBA ===
+{
+	"caso" : 1,
+	"nombre" : "Documento completo",
+	"resultadoEsperado" : "ACEPTADO",
+	"resultadoObtenido" : "ACEPTADO",
+	"coincide" : true,
+	"reglaEvaluada" : "Cumple campos, tipos, dominios y GeoJSON.",
+	"mensaje" : "El documento se insertó."
+}
+{
+	"caso" : 2,
+	"nombre" : "Documento válido sin opcionales",
+	"resultadoEsperado" : "ACEPTADO",
+	"resultadoObtenido" : "ACEPTADO",
+	"coincide" : true,
+	"reglaEvaluada" : "nombre, tipo y ubicacion son opcionales.",
+	"mensaje" : "El documento se insertó."
+}
+{
+	"caso" : 3,
+	"nombre" : "Falta clasificacionDelito",
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "clasificacionDelito está en required.",
+	"mensaje" : "Document failed validation"
+}
+{
+	"caso" : 4,
+	"nombre" : "Fecha de registro como texto",
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "fechaRegistro debe ser BSON Date.",
+	"mensaje" : "Document failed validation"
+}
+{
+	"caso" : 5,
+	"nombre" : "Clasificación fuera del dominio",
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "La clasificación debe pertenecer al enum.",
+	"mensaje" : "Document failed validation"
+}
+{
+	"caso" : 6,
+	"nombre" : "Falta municipio",
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "lugar.municipio está en required.",
+	"mensaje" : "Document failed validation"
+}
+{
+	"caso" : 7,
+	"nombre" : "Tipo de lugar fuera del dominio",
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "lugar.tipo sólo admite tres valores.",
+	"mensaje" : "Document failed validation"
+}
+{
+	"caso" : 8,
+	"nombre" : "Tipo geométrico incorrecto",
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "ubicacion.type sólo admite Point.",
+	"mensaje" : "Document failed validation"
+}
+{
+	"caso" : 9,
+	"nombre" : "Coordenadas incompletas",
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "coordinates debe contener dos números.",
+	"mensaje" : "Document failed validation"
+}
+=== RESUMEN ===
+{
+	"totalCasos" : 9,
+	"casosCorrectos" : 9,
+	"fallas" : 0,
+	"documentosAceptados" : 2
+}
+
+11. Generando el perfil geoespacial
+
+Ejecutando: scripts/perfil_geoespacial.js
+=== COBERTURA GEOGRÁFICA ===
+{
+	"totalDocumentos" : 175482,
+	"conUbicacion" : 140463,
+	"sinUbicacion" : 35019,
+	"tipoPoint" : 140463,
+	"coordenadasEnIntervalo" : 140463
+}
+=== INTERVALOS OBSERVADOS ===
+[
+	{
+		"longitudMinima" : -115.594338,
+		"longitudMaxima" : -114.7321086,
+		"latitudMinima" : 32.18634594,
+		"latitudMaxima" : 32.71268582,
+		"documentos" : 140463
+	}
+]
+=== DOCUMENTO DE CONTROL EN MIRASOL ===
+{
+	"_id" : ObjectId("6a8291dda4a31c6619f01232"),
+	"clasificacionDelito" : "VEHICLE THEFT",
+	"fechaOcurrencia" : ISODate("2024-09-25T21:00:00Z"),
+	"lugar" : {
+		"municipio" : "MEXICALI",
+		"nombre" : "MIRASOL",
+		"tipo" : "SUBDIVISION"
+	},
+	"ubicacion" : {
+		"type" : "Point",
+		"coordinates" : [
+			-115.3862048,
+			32.60621895
+		]
+	}
+}
+
+12. Ejecutando el análisis geoespacial
+
+Ejecutando: scripts/analisis_geoespacial.js
+=== CREACIÓN DEL ÍNDICE GEOESPACIAL ===
+=== ÍNDICES DISPONIBLES ===
+[
+	{
+		"v" : 2,
+		"key" : {
+			"_id" : 1
+		},
+		"name" : "_id_"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"clasificacionDelito" : 1,
+			"fechaOcurrencia" : -1,
+			"_id" : 1
+		},
+		"name" : "idx_clasificacion_fecha_id"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"lugar.nombre" : 1,
+			"fechaOcurrencia" : -1,
+			"_id" : 1
+		},
+		"name" : "idx_lugar_fecha_id"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"ubicacion" : "2dsphere"
+		},
+		"name" : "idx_ubicacion_2dsphere",
+		"2dsphereIndexVersion" : 3
+	}
+]
+=== DIEZ REGISTROS MÁS CERCANOS ===
+[
+	{
+		"_id" : ObjectId("6a8291d6a4a31c6619ed653f"),
+		"clasificacionDelito" : "HOME ROBBERY",
+		"fechaOcurrencia" : ISODate("2014-01-01T02:00:00Z"),
+		"lugar" : {
+			"municipio" : "MEXICALI",
+			"nombre" : "MIRASOL",
+			"tipo" : "SUBDIVISION"
+		},
+		"ubicacion" : {
+			"type" : "Point",
+			"coordinates" : [
+				-115.3862048,
+				32.60621895
+			]
+		},
+		"distanciaMetros" : 0
+	},
+	{
+		"_id" : ObjectId("6a8291d6a4a31c6619ed6a35"),
+		"clasificacionDelito" : "HOME ROBBERY",
+		"fechaOcurrencia" : ISODate("2014-01-21T08:30:00Z"),
+		"lugar" : {
+			"municipio" : "MEXICALI",
+			"nombre" : "MIRASOL",
+			"tipo" : "SUBDIVISION"
+		},
+		"ubicacion" : {
+			"type" : "Point",
+			"coordinates" : [
+				-115.3862048,
+				32.60621895
+			]
+		},
+		"distanciaMetros" : 0
+	},
+	{
+		"_id" : ObjectId("6a8291d6a4a31c6619ed6fa2"),
+		"clasificacionDelito" : "ROBBERY TO COMMERCE",
+		"fechaOcurrencia" : ISODate("2014-02-11T03:00:00Z"),
+		"lugar" : {
+			"municipio" : "MEXICALI",
+			"nombre" : "MIRASOL",
+			"tipo" : "SUBDIVISION"
+		},
+		"ubicacion" : {
+			"type" : "Point",
+			"coordinates" : [
+				-115.3862048,
+				32.60621895
+			]
+		},
+		"distanciaMetros" : 0
+	},
+	{
+		"_id" : ObjectId("6a8291d6a4a31c6619ed7950"),
+		"clasificacionDelito" : "MALICIOUS INJURY",
+		"fechaOcurrencia" : ISODate("2014-03-17T23:30:00Z"),
+		"lugar" : {
+			"municipio" : "MEXICALI",
+			"nombre" : "MIRASOL",
+			"tipo" : "SUBDIVISION"
+		},
+		"ubicacion" : {
+			"type" : "Point",
+			"coordinates" : [
+				-115.3862048,
+				32.60621895
+			]
+		},
+		"distanciaMetros" : 0
+	},
+	{
+		"_id" : ObjectId("6a8291d6a4a31c6619eda2e0"),
+		"clasificacionDelito" : "VEHICLE THEFT",
+		"fechaOcurrencia" : ISODate("2014-08-23T04:00:00Z"),
+		"lugar" : {
+			"municipio" : "MEXICALI",
+			"nombre" : "MIRASOL",
+			"tipo" : "SUBDIVISION"
+		},
+		"ubicacion" : {
+			"type" : "Point",
+			"coordinates" : [
+				-115.3862048,
+				32.60621895
+			]
+		},
+		"distanciaMetros" : 0
+	},
+	{
+		"_id" : ObjectId("6a8291d7a4a31c6619edeb69"),
+		"clasificacionDelito" : "HOME ROBBERY",
+		"fechaOcurrencia" : ISODate("2015-06-16T16:20:00Z"),
+		"lugar" : {
+			"municipio" : "MEXICALI",
+			"nombre" : "MIRASOL",
+			"tipo" : "SUBDIVISION"
+		},
+		"ubicacion" : {
+			"type" : "Point",
+			"coordinates" : [
+				-115.3862048,
+				32.60621895
+			]
+		},
+		"distanciaMetros" : 0
+	},
+	{
+		"_id" : ObjectId("6a8291d9a4a31c6619eea3c2"),
+		"clasificacionDelito" : "ROBBERY WITH VIOLENCE (IN PUBLIC STREETS)",
+		"fechaOcurrencia" : ISODate("2017-09-02T07:05:00Z"),
+		"lugar" : {
+			"municipio" : "MEXICALI",
+			"nombre" : "MIRASOL",
+			"tipo" : "SUBDIVISION"
+		},
+		"ubicacion" : {
+			"type" : "Point",
+			"coordinates" : [
+				-115.3862048,
+				32.60621895
+			]
+		},
+		"distanciaMetros" : 0
+	},
+	{
+		"_id" : ObjectId("6a8291dca4a31c6619efcaaf"),
+		"clasificacionDelito" : "VEHICLE THEFT WITH VIOLENCE",
+		"fechaOcurrencia" : ISODate("2023-01-26T19:17:00Z"),
+		"lugar" : {
+			"municipio" : "MEXICALI",
+			"nombre" : "MIRASOL",
+			"tipo" : "SUBDIVISION"
+		},
+		"ubicacion" : {
+			"type" : "Point",
+			"coordinates" : [
+				-115.3862048,
+				32.60621895
+			]
+		},
+		"distanciaMetros" : 0
+	},
+	{
+		"_id" : ObjectId("6a8291dda4a31c6619f01232"),
+		"clasificacionDelito" : "VEHICLE THEFT",
+		"fechaOcurrencia" : ISODate("2024-09-25T21:00:00Z"),
+		"lugar" : {
+			"municipio" : "MEXICALI",
+			"nombre" : "MIRASOL",
+			"tipo" : "SUBDIVISION"
+		},
+		"ubicacion" : {
+			"type" : "Point",
+			"coordinates" : [
+				-115.3862048,
+				32.60621895
+			]
+		},
+		"distanciaMetros" : 0
+	},
+	{
+		"_id" : ObjectId("6a8291dda4a31c6619f01037"),
+		"clasificacionDelito" : "OTHER NONVIOLENT ROBBERIES",
+		"fechaOcurrencia" : ISODate("2024-09-08T15:21:00Z"),
+		"lugar" : {
+			"municipio" : "MEXICALI",
+			"nombre" : "MIRASOL",
+			"tipo" : "SUBDIVISION"
+		},
+		"ubicacion" : {
+			"type" : "Point",
+			"coordinates" : [
+				-115.3862048,
+				32.60621895
+			]
+		},
+		"distanciaMetros" : 0
+	}
+]
+=== COMPROBACIÓN DE PROXIMIDAD ===
+{
+	"referencia" : {
+		"type" : "Point",
+		"coordinates" : [
+			-115.3862048,
+			32.60621895
+		]
+	},
+	"distanciaMaximaMetros" : 5000,
+	"resultadosMostrados" : 10,
+	"ordenAscendentePorDistancia" : true,
+	"todosDentroDelLimite" : true
+}
+=== ROBOS DE VEHÍCULO DENTRO DE 5 KM ===
+[
+	{
+		"totalRegistros" : 9513,
+		"distanciaPromedioMetros" : 2721.06,
+		"distanciaMaximaObservada" : 4989.75
+	}
+]
+=== CASO DE CONTROL FUERA DE 5 KM ===
+[
+	{
+		"_id" : ObjectId("6a8291d9a4a31c6619ee90fc"),
+		"clasificacionDelito" : "HOME ROBBERY",
+		"lugar" : {
+			"municipio" : "MEXICALI",
+			"nombre" : "PORTICOS DEL VALLE",
+			"tipo" : "SUBDIVISION"
+		},
+		"ubicacion" : {
+			"type" : "Point",
+			"coordinates" : [
+				-115.4380174,
+				32.59445559
+			]
+		},
+		"distanciaMetros" : 5032.367948017309
+	}
+]
+
+13. Ejecutando las pruebas geográficas adicionales
+
+Ejecutando: scripts/pruebas_geograficas_adicionales.js
+=== PRUEBA DE LONGITUD ===
+{
+	"nombre" : "Longitud fuera del intervalo",
+	"coordenadas" : [
+		200,
+		32.60621895
+	],
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "La longitud debe estar entre -180 y 180 y la latitud entre -90 y 90.",
+	"mensaje" : "Document failed validation"
+}
+=== PRUEBA DE LATITUD ===
+{
+	"nombre" : "Latitud fuera del intervalo",
+	"coordenadas" : [
+		-115.3862048,
+		95
+	],
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "La longitud debe estar entre -180 y 180 y la latitud entre -90 y 90.",
+	"mensaje" : "Document failed validation"
+}
+=== CONTROL DEL FILTRO TEMÁTICO ===
+{
+	"nombre" : "Registro cercano con clasificación diferente",
+	"documentoControl" : {
+		"_id" : ObjectId("6a8291dca4a31c6619efdb26"),
+		"clasificacionDelito" : "CULPABLE INJURIES",
+		"fechaOcurrencia" : ISODate("2023-06-25T10:44:00Z"),
+		"lugar" : {
+			"municipio" : "MEXICALI",
+			"nombre" : "MIRASOL",
+			"tipo" : "SUBDIVISION"
+		},
+		"ubicacion" : {
+			"type" : "Point",
+			"coordinates" : [
+				-115.3862048,
+				32.60621895
+			]
+		}
+	},
+	"resultadoEsperado" : "EXCLUIDO POR EL FILTRO DE VEHICLE THEFT",
+	"totalCoincidencias" : 0,
+	"coincide" : true
+}
+=== RESUMEN DE PRUEBAS ADICIONALES ===
+{
+	"totalPruebas" : 3,
+	"pruebasCorrectas" : 3,
+	"fallas" : 0,
+	"resultadoGeneral" : "TODAS LAS PRUEBAS COINCIDEN"
+}
+
+14. Ejecutando el análisis temporal
+
+Ejecutando: scripts/analisis_temporal.js
+=== COBERTURA TEMPORAL ===
+[
+	{
+		"primeraFecha" : ISODate("2014-01-01T00:00:00Z"),
+		"ultimaFecha" : ISODate("2024-09-30T18:30:00Z"),
+		"totalDocumentos" : 175482
+	}
+]
+=== REGISTROS POR MES DURANTE 2023 ===
+[
+	{
+		"totalRegistros" : 917,
+		"mes" : 1
+	},
+	{
+		"totalRegistros" : 790,
+		"mes" : 2
+	},
+	{
+		"totalRegistros" : 888,
+		"mes" : 3
+	},
+	{
+		"totalRegistros" : 837,
+		"mes" : 4
+	},
+	{
+		"totalRegistros" : 885,
+		"mes" : 5
+	},
+	{
+		"totalRegistros" : 871,
+		"mes" : 6
+	},
+	{
+		"totalRegistros" : 889,
+		"mes" : 7
+	},
+	{
+		"totalRegistros" : 755,
+		"mes" : 8
+	},
+	{
+		"totalRegistros" : 905,
+		"mes" : 9
+	},
+	{
+		"totalRegistros" : 856,
+		"mes" : 10
+	},
+	{
+		"totalRegistros" : 863,
+		"mes" : 11
+	},
+	{
+		"totalRegistros" : 892,
+		"mes" : 12
+	}
+]
+=== REGISTROS POR DÍA DE LA SEMANA ===
+[
+	{
+		"totalRegistros" : 26052,
+		"numeroDiaMongo" : 1,
+		"nombreDia" : "DOMINGO"
+	},
+	{
+		"totalRegistros" : 27260,
+		"numeroDiaMongo" : 2,
+		"nombreDia" : "LUNES"
+	},
+	{
+		"totalRegistros" : 24563,
+		"numeroDiaMongo" : 3,
+		"nombreDia" : "MARTES"
+	},
+	{
+		"totalRegistros" : 24642,
+		"numeroDiaMongo" : 4,
+		"nombreDia" : "MIERCOLES"
+	},
+	{
+		"totalRegistros" : 24458,
+		"numeroDiaMongo" : 5,
+		"nombreDia" : "JUEVES"
+	},
+	{
+		"totalRegistros" : 24647,
+		"numeroDiaMongo" : 6,
+		"nombreDia" : "VIERNES"
+	},
+	{
+		"totalRegistros" : 23860,
+		"numeroDiaMongo" : 7,
+		"nombreDia" : "SABADO"
+	}
+]
+=== COBERTURA MENSUAL DE 2024 ===
+[
+	{
+		"totalRegistros" : 1120,
+		"mes" : 1
+	},
+	{
+		"totalRegistros" : 993,
+		"mes" : 2
+	},
+	{
+		"totalRegistros" : 1109,
+		"mes" : 3
+	},
+	{
+		"totalRegistros" : 1021,
+		"mes" : 4
+	},
+	{
+		"totalRegistros" : 1065,
+		"mes" : 5
+	},
+	{
+		"totalRegistros" : 929,
+		"mes" : 6
+	},
+	{
+		"totalRegistros" : 868,
+		"mes" : 7
+	},
+	{
+		"totalRegistros" : 944,
+		"mes" : 8
+	},
+	{
+		"totalRegistros" : 715,
+		"mes" : 9
+	}
+]
+Nota: MongoDB numera domingo como 1 y sábado como 7.
+
+15. Ejecutando la comprobación final
+
+Ejecutando: scripts/evidencia_final.js
+=== EVIDENCIA FINAL DEL PROYECTO ===
+=== PERFIL DE LA COLECCIÓN ===
+{
+	"totalDocumentos" : 175482,
+	"fechasRegistroBsonDate" : 175482,
+	"fechasOcurrenciaBsonDate" : 175482,
+	"conUbicacion" : 140463,
+	"sinUbicacion" : 35019,
+	"sinNombreLugar" : 19
+}
+=== COBERTURA TEMPORAL ===
+{
+	"primeraFecha" : ISODate("2014-01-01T00:00:00Z"),
+	"ultimaFecha" : ISODate("2024-09-30T18:30:00Z")
+}
+=== CLASIFICACIÓN MÁS FRECUENTE ===
+{ "totalRegistros" : 37331, "clasificacionDelito" : "VEHICLE THEFT" }
+=== ÍNDICES DISPONIBLES ===
+[
+	{
+		"v" : 2,
+		"key" : {
+			"_id" : 1
+		},
+		"name" : "_id_"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"clasificacionDelito" : 1,
+			"fechaOcurrencia" : -1,
+			"_id" : 1
+		},
+		"name" : "idx_clasificacion_fecha_id"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"lugar.nombre" : 1,
+			"fechaOcurrencia" : -1,
+			"_id" : 1
+		},
+		"name" : "idx_lugar_fecha_id"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"ubicacion" : "2dsphere"
+		},
+		"name" : "idx_ubicacion_2dsphere",
+		"2dsphereIndexVersion" : 3
+	}
+]
+=== CONFIGURACIÓN DEL VALIDADOR ===
+{
+	"jsonSchemaConfigurado" : true,
+	"validationLevel" : "strict",
+	"validationAction" : "error"
+}
+=== RESULTADO GEOESPACIAL ===
+{
+	"puntoReferencia" : {
+		"type" : "Point",
+		"coordinates" : [
+			-115.3862048,
+			32.60621895
+		]
+	},
+	"radioMetros" : 5000,
+	"clasificacionDelito" : "VEHICLE THEFT",
+	"totalRegistros" : 9513
+}
+=== COMPROBACIONES ===
+{
+	"numero" : 1,
+	"comprobacion" : "La colección contiene 175482 documentos",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 2,
+	"comprobacion" : "Todas las fechas de registro son BSON Date",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 3,
+	"comprobacion" : "Todas las fechas de ocurrencia son BSON Date",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 4,
+	"comprobacion" : "La cobertura geográfica suma el total de documentos",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 5,
+	"comprobacion" : "Existe el índice de clasificación y fecha",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 6,
+	"comprobacion" : "Existe el índice de lugar y fecha",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 7,
+	"comprobacion" : "Existe el índice geoespacial 2dsphere",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 8,
+	"comprobacion" : "La colección tiene un validador JSON Schema",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 9,
+	"comprobacion" : "La validación está configurada como strict y error",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 10,
+	"comprobacion" : "VEHICLE THEFT es la clasificación más frecuente",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 11,
+	"comprobacion" : "Hay 9513 robos de vehículo dentro de cinco kilómetros",
+	"resultado" : "CORRECTO"
+}
+=== RESUMEN FINAL ===
+{
+	"totalComprobaciones" : 11,
+	"comprobacionesCorrectas" : 11,
+	"comprobacionesConFalla" : 0,
+	"resultadoGeneral" : "PROYECTO VERIFICADO CORRECTAMENTE"
+}
+
+========================================
+PROCESO TERMINADO CORRECTAMENTE
+========================================
+Base de datos: m6_nosql
+Colección: delitos_mexicali
+Resultados: /mnt/vocwork2/work/eee_W_6522809/asn5570907_1/asn5570908_1/work/proyecto-final-mexicali/resultados

@@ -34,8 +34,8 @@ La primera medición se realizó únicamente con el índice obligatorio `_id_`.
 
 | Consulta | Etapas | nReturned | totalKeysExamined | totalDocsExamined | Tiempo |
 |---|---|---:|---:|---:|---:|
-| A | `PROJECTION_SIMPLE`, `SORT`, `COLLSCAN` | 20 | 0 | 175,482 | 89 ms |
-| B | `PROJECTION_DEFAULT`, `SORT`, `COLLSCAN` | 20 | 0 | 175,482 | 91 ms |
+| A | `PROJECTION_SIMPLE`, `SORT`, `COLLSCAN` | 20 | 0 | 175,482 | 92 ms |
+| B | `PROJECTION_DEFAULT`, `SORT`, `COLLSCAN` | 20 | 0 | 175,482 | 92 ms |
 
 MongoDB recorrió los 175,482 documentos y realizó un ordenamiento independiente para devolver solamente 20 resultados en cada consulta.
 
@@ -111,6 +111,6 @@ Los índices requieren almacenamiento adicional y aumentan el costo de inserció
 
 No se creó un índice para cada campo. Se propusieron solamente dos índices derivados de consultas específicas.
 
-El tiempo de ejecución disminuyó de 89 y 91 ms a 0 ms en esta ejecución. Sin embargo, el tiempo puede variar por caché, carga del entorno y precisión de la medición. La evidencia principal es el cambio de `COLLSCAN` a `IXSCAN`, la eliminación de `SORT` y la reducción de documentos examinados.
+El tiempo de ejecución disminuyó de 92 ms en ambas consultas a 0 ms en esta ejecución. Sin embargo, el tiempo puede variar por caché, carga del entorno y precisión de la medición. La evidencia principal es el cambio de `COLLSCAN` a `IXSCAN`, la eliminación de `SORT` y la reducción de documentos examinados.
 
 Los resultados corresponden a este conjunto y entorno de prueba. No demuestran que los mismos índices mejoren cualquier consulta o carga de trabajo.
