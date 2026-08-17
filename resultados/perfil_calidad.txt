@@ -1,0 +1,42 @@
+=== PRESENCIA Y TIPOS DE CAMPOS ===
+{
+	"totalDocumentos" : 175482,
+	"sinClasificacionDelito" : 0,
+	"clasificacionesString" : 175482,
+	"sinFechaRegistro" : 0,
+	"fechasRegistroDate" : 175482,
+	"sinFechaOcurrencia" : 0,
+	"fechasOcurrenciaDate" : 175482,
+	"sinLugar" : 0,
+	"sinMunicipio" : 0,
+	"sinNombreLugar" : 19,
+	"sinTipoLugar" : 35019,
+	"conUbicacion" : 140463,
+	"sinUbicacion" : 35019,
+	"ubicacionesPoint" : 140463
+}
+=== DOMINIO DE MUNICIPIO ===
+[ "MEXICALI" ]
+=== DOMINIO DE TIPO DE LUGAR ===
+[ "CITY", "COLONY", "SUBDIVISION" ]
+=== CLASIFICACIONES DELICTIVAS ===
+[
+	"BANK ROBBERY",
+	"CULPABLE INJURIES",
+	"HOME ROBBERY",
+	"HOME ROBBERY WITH VIOLENCE",
+	"HOMICIDE (FEMICIDE)",
+	"HOMICIDE (VIOLENT)",
+	"KIDNAPPING",
+	"MALICIOUS INJURY",
+	"OTHER NONVIOLENT ROBBERIES",
+	"OTHER ROBBERIES WITH VIOLENCE",
+	"ROBBERY TO COMMERCE",
+	"ROBBERY WITH VIOLENCE (IN PUBLIC STREETS)",
+	"ROBBERY WITH VIOLENCE TO COMMERCE",
+	"SIMPLE THEFT (ON PUBLIC ROADS)",
+	"VEHICLE THEFT",
+	"VEHICLE THEFT WITH VIOLENCE"
+]
+=== CANTIDAD DE CLASIFICACIONES ===
+16

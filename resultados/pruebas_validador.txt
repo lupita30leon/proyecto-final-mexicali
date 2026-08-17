@@ -1,0 +1,91 @@
+=== CREACIÓN DE LA COLECCIÓN DE PRUEBAS ===
+{ "ok" : 1 }
+=== CASOS DE PRUEBA ===
+{
+	"caso" : 1,
+	"nombre" : "Documento completo",
+	"resultadoEsperado" : "ACEPTADO",
+	"resultadoObtenido" : "ACEPTADO",
+	"coincide" : true,
+	"reglaEvaluada" : "Cumple campos, tipos, dominios y GeoJSON.",
+	"mensaje" : "El documento se insertó."
+}
+{
+	"caso" : 2,
+	"nombre" : "Documento válido sin opcionales",
+	"resultadoEsperado" : "ACEPTADO",
+	"resultadoObtenido" : "ACEPTADO",
+	"coincide" : true,
+	"reglaEvaluada" : "nombre, tipo y ubicacion son opcionales.",
+	"mensaje" : "El documento se insertó."
+}
+{
+	"caso" : 3,
+	"nombre" : "Falta clasificacionDelito",
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "clasificacionDelito está en required.",
+	"mensaje" : "Document failed validation"
+}
+{
+	"caso" : 4,
+	"nombre" : "Fecha de registro como texto",
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "fechaRegistro debe ser BSON Date.",
+	"mensaje" : "Document failed validation"
+}
+{
+	"caso" : 5,
+	"nombre" : "Clasificación fuera del dominio",
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "La clasificación debe pertenecer al enum.",
+	"mensaje" : "Document failed validation"
+}
+{
+	"caso" : 6,
+	"nombre" : "Falta municipio",
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "lugar.municipio está en required.",
+	"mensaje" : "Document failed validation"
+}
+{
+	"caso" : 7,
+	"nombre" : "Tipo de lugar fuera del dominio",
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "lugar.tipo sólo admite tres valores.",
+	"mensaje" : "Document failed validation"
+}
+{
+	"caso" : 8,
+	"nombre" : "Tipo geométrico incorrecto",
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "ubicacion.type sólo admite Point.",
+	"mensaje" : "Document failed validation"
+}
+{
+	"caso" : 9,
+	"nombre" : "Coordenadas incompletas",
+	"resultadoEsperado" : "RECHAZADO",
+	"resultadoObtenido" : "RECHAZADO",
+	"coincide" : true,
+	"reglaEvaluada" : "coordinates debe contener dos números.",
+	"mensaje" : "Document failed validation"
+}
+=== RESUMEN ===
+{
+	"totalCasos" : 9,
+	"casosCorrectos" : 9,
+	"fallas" : 0,
+	"documentosAceptados" : 2
+}
