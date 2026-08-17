@@ -1,0 +1,104 @@
+=== MEDICIÓN DESPUÉS DE CREAR ÍNDICES ===
+CONSULTA A: VEHICLE THEFT DURANTE 2023
+{
+	"etapas" : [
+		"LIMIT",
+		"PROJECTION_COVERED",
+		"IXSCAN"
+	],
+	"nReturned" : 20,
+	"totalKeysExamined" : 20,
+	"totalDocsExamined" : 0,
+	"executionTimeMillis" : 0,
+	"cantidadResultadosGuardados" : 20,
+	"primeraFecha" : ISODate("2023-12-31T23:30:00Z"),
+	"ultimaFecha" : ISODate("2023-12-29T14:00:00Z"),
+	"idsResultados" : [
+		"6a7fadba1a330b39d93499de",
+		"6a7fadba1a330b39d93499d1",
+		"6a7fadba1a330b39d93499d7",
+		"6a7fadba1a330b39d93499ce",
+		"6a7fadba1a330b39d93499f4",
+		"6a7fadba1a330b39d93499cd",
+		"6a7fadba1a330b39d93499ff",
+		"6a7fadba1a330b39d93499d0",
+		"6a7fadba1a330b39d93499d2",
+		"6a7fadba1a330b39d93499cf",
+		"6a7fadba1a330b39d93499bc",
+		"6a7fadba1a330b39d93499c5",
+		"6a7fadba1a330b39d93499c6",
+		"6a7fadba1a330b39d93499d3",
+		"6a7fadba1a330b39d93499c1",
+		"6a7fadba1a330b39d93499c4",
+		"6a7fadba1a330b39d93499bf",
+		"6a7fadba1a330b39d93499c0",
+		"6a7fadba1a330b39d93499a0",
+		"6a7fadba1a330b39d93499b4"
+	]
+}
+CONSULTA B: VALLE DEL PEDREGAL ENTRE 2020 Y 2024
+{
+	"etapas" : [
+		"LIMIT",
+		"PROJECTION_DEFAULT",
+		"FETCH",
+		"IXSCAN"
+	],
+	"nReturned" : 20,
+	"totalKeysExamined" : 20,
+	"totalDocsExamined" : 20,
+	"executionTimeMillis" : 0,
+	"cantidadResultadosGuardados" : 20,
+	"primeraFecha" : ISODate("2024-09-30T11:30:00Z"),
+	"ultimaFecha" : ISODate("2024-08-21T13:10:00Z"),
+	"idsResultados" : [
+		"6a7fadba1a330b39d934bca1",
+		"6a7fadba1a330b39d934bc67",
+		"6a7fadba1a330b39d934bc3e",
+		"6a7fadba1a330b39d934bc3c",
+		"6a7fadba1a330b39d934bbd2",
+		"6a7fadba1a330b39d934bb18",
+		"6a7fadba1a330b39d934bc0f",
+		"6a7fadba1a330b39d934bc3d",
+		"6a7fadba1a330b39d934bb57",
+		"6a7fadba1a330b39d934ba12",
+		"6a7fadba1a330b39d934b9fe",
+		"6a7fadba1a330b39d934ba6d",
+		"6a7fadba1a330b39d934b98e",
+		"6a7fadba1a330b39d934b9ef",
+		"6a7fadba1a330b39d934b927",
+		"6a7fadba1a330b39d934b9b1",
+		"6a7fadba1a330b39d934b859",
+		"6a7fadba1a330b39d934b840",
+		"6a7fadba1a330b39d934b841",
+		"6a7fadba1a330b39d934b7f9"
+	]
+}
+=== ÍNDICES DISPONIBLES ===
+[
+	{
+		"v" : 2,
+		"key" : {
+			"_id" : 1
+		},
+		"name" : "_id_"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"clasificacionDelito" : 1,
+			"fechaOcurrencia" : -1,
+			"_id" : 1
+		},
+		"name" : "idx_clasificacion_fecha_id"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"lugar.nombre" : 1,
+			"fechaOcurrencia" : -1,
+			"_id" : 1
+		},
+		"name" : "idx_lugar_fecha_id"
+	}
+]

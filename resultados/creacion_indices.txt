@@ -1,0 +1,34 @@
+=== ÍNDICES ANTES DE LA CREACIÓN ===
+[ { "v" : 2, "key" : { "_id" : 1 }, "name" : "_id_" } ]
+=== CREACIÓN DEL ÍNDICE A ===
+[object BSON]
+=== CREACIÓN DEL ÍNDICE B ===
+[object BSON]
+=== ÍNDICES DESPUÉS DE LA CREACIÓN ===
+[
+	{
+		"v" : 2,
+		"key" : {
+			"_id" : 1
+		},
+		"name" : "_id_"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"clasificacionDelito" : 1,
+			"fechaOcurrencia" : -1,
+			"_id" : 1
+		},
+		"name" : "idx_clasificacion_fecha_id"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"lugar.nombre" : 1,
+			"fechaOcurrencia" : -1,
+			"_id" : 1
+		},
+		"name" : "idx_lugar_fecha_id"
+	}
+]
