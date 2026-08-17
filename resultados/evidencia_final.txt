@@ -1,0 +1,135 @@
+=== EVIDENCIA FINAL DEL PROYECTO ===
+=== PERFIL DE LA COLECCIÓN ===
+{
+	"totalDocumentos" : 175482,
+	"fechasRegistroBsonDate" : 175482,
+	"fechasOcurrenciaBsonDate" : 175482,
+	"conUbicacion" : 140463,
+	"sinUbicacion" : 35019,
+	"sinNombreLugar" : 19
+}
+=== COBERTURA TEMPORAL ===
+{
+	"primeraFecha" : ISODate("2014-01-01T00:00:00Z"),
+	"ultimaFecha" : ISODate("2024-09-30T18:30:00Z")
+}
+=== CLASIFICACIÓN MÁS FRECUENTE ===
+{ "totalRegistros" : 37331, "clasificacionDelito" : "VEHICLE THEFT" }
+=== ÍNDICES DISPONIBLES ===
+[
+	{
+		"v" : 2,
+		"key" : {
+			"_id" : 1
+		},
+		"name" : "_id_"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"clasificacionDelito" : 1,
+			"fechaOcurrencia" : -1,
+			"_id" : 1
+		},
+		"name" : "idx_clasificacion_fecha_id"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"lugar.nombre" : 1,
+			"fechaOcurrencia" : -1,
+			"_id" : 1
+		},
+		"name" : "idx_lugar_fecha_id"
+	},
+	{
+		"v" : 2,
+		"key" : {
+			"ubicacion" : "2dsphere"
+		},
+		"name" : "idx_ubicacion_2dsphere",
+		"2dsphereIndexVersion" : 3
+	}
+]
+=== CONFIGURACIÓN DEL VALIDADOR ===
+{
+	"jsonSchemaConfigurado" : true,
+	"validationLevel" : "strict",
+	"validationAction" : "error"
+}
+=== RESULTADO GEOESPACIAL ===
+{
+	"puntoReferencia" : {
+		"type" : "Point",
+		"coordinates" : [
+			-115.3862048,
+			32.60621895
+		]
+	},
+	"radioMetros" : 5000,
+	"clasificacionDelito" : "VEHICLE THEFT",
+	"totalRegistros" : 9513
+}
+=== COMPROBACIONES ===
+{
+	"numero" : 1,
+	"comprobacion" : "La colección contiene 175482 documentos",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 2,
+	"comprobacion" : "Todas las fechas de registro son BSON Date",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 3,
+	"comprobacion" : "Todas las fechas de ocurrencia son BSON Date",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 4,
+	"comprobacion" : "La cobertura geográfica suma el total de documentos",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 5,
+	"comprobacion" : "Existe el índice de clasificación y fecha",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 6,
+	"comprobacion" : "Existe el índice de lugar y fecha",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 7,
+	"comprobacion" : "Existe el índice geoespacial 2dsphere",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 8,
+	"comprobacion" : "La colección tiene un validador JSON Schema",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 9,
+	"comprobacion" : "La validación está configurada como strict y error",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 10,
+	"comprobacion" : "VEHICLE THEFT es la clasificación más frecuente",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 11,
+	"comprobacion" : "Hay 9513 robos de vehículo dentro de cinco kilómetros",
+	"resultado" : "CORRECTO"
+}
+=== RESUMEN FINAL ===
+{
+	"totalComprobaciones" : 11,
+	"comprobacionesCorrectas" : 11,
+	"comprobacionesConFalla" : 0,
+	"resultadoGeneral" : "PROYECTO VERIFICADO CORRECTAMENTE"
+}
