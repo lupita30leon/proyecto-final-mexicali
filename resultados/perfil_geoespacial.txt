@@ -1,0 +1,36 @@
+=== COBERTURA GEOGRÁFICA ===
+{
+	"totalDocumentos" : 175482,
+	"conUbicacion" : 140463,
+	"sinUbicacion" : 35019,
+	"tipoPoint" : 140463,
+	"coordenadasEnIntervalo" : 140463
+}
+=== INTERVALOS OBSERVADOS ===
+[
+	{
+		"longitudMinima" : -115.594338,
+		"longitudMaxima" : -114.7321086,
+		"latitudMinima" : 32.18634594,
+		"latitudMaxima" : 32.71268582,
+		"documentos" : 140463
+	}
+]
+=== DOCUMENTO DE CONTROL EN MIRASOL ===
+{
+	"_id" : ObjectId("6a7fadba1a330b39d934bc1f"),
+	"clasificacionDelito" : "VEHICLE THEFT",
+	"fechaOcurrencia" : ISODate("2024-09-25T21:00:00Z"),
+	"lugar" : {
+		"municipio" : "MEXICALI",
+		"nombre" : "MIRASOL",
+		"tipo" : "SUBDIVISION"
+	},
+	"ubicacion" : {
+		"type" : "Point",
+		"coordinates" : [
+			-115.3862048,
+			32.60621895
+		]
+	}
+}
