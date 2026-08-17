@@ -1,0 +1,137 @@
+=== COBERTURA TEMPORAL ===
+[
+	{
+		"primeraFecha" : ISODate("2014-01-01T00:00:00Z"),
+		"ultimaFecha" : ISODate("2024-09-30T18:30:00Z"),
+		"totalDocumentos" : 175482
+	}
+]
+=== REGISTROS POR MES DURANTE 2023 ===
+[
+	{
+		"totalRegistros" : 917,
+		"mes" : 1
+	},
+	{
+		"totalRegistros" : 790,
+		"mes" : 2
+	},
+	{
+		"totalRegistros" : 888,
+		"mes" : 3
+	},
+	{
+		"totalRegistros" : 837,
+		"mes" : 4
+	},
+	{
+		"totalRegistros" : 885,
+		"mes" : 5
+	},
+	{
+		"totalRegistros" : 871,
+		"mes" : 6
+	},
+	{
+		"totalRegistros" : 889,
+		"mes" : 7
+	},
+	{
+		"totalRegistros" : 755,
+		"mes" : 8
+	},
+	{
+		"totalRegistros" : 905,
+		"mes" : 9
+	},
+	{
+		"totalRegistros" : 856,
+		"mes" : 10
+	},
+	{
+		"totalRegistros" : 863,
+		"mes" : 11
+	},
+	{
+		"totalRegistros" : 892,
+		"mes" : 12
+	}
+]
+=== REGISTROS POR DÍA DE LA SEMANA ===
+[
+	{
+		"totalRegistros" : 26052,
+		"numeroDiaMongo" : 1,
+		"nombreDia" : "DOMINGO"
+	},
+	{
+		"totalRegistros" : 27260,
+		"numeroDiaMongo" : 2,
+		"nombreDia" : "LUNES"
+	},
+	{
+		"totalRegistros" : 24563,
+		"numeroDiaMongo" : 3,
+		"nombreDia" : "MARTES"
+	},
+	{
+		"totalRegistros" : 24642,
+		"numeroDiaMongo" : 4,
+		"nombreDia" : "MIERCOLES"
+	},
+	{
+		"totalRegistros" : 24458,
+		"numeroDiaMongo" : 5,
+		"nombreDia" : "JUEVES"
+	},
+	{
+		"totalRegistros" : 24647,
+		"numeroDiaMongo" : 6,
+		"nombreDia" : "VIERNES"
+	},
+	{
+		"totalRegistros" : 23860,
+		"numeroDiaMongo" : 7,
+		"nombreDia" : "SABADO"
+	}
+]
+=== COBERTURA MENSUAL DE 2024 ===
+[
+	{
+		"totalRegistros" : 1120,
+		"mes" : 1
+	},
+	{
+		"totalRegistros" : 993,
+		"mes" : 2
+	},
+	{
+		"totalRegistros" : 1109,
+		"mes" : 3
+	},
+	{
+		"totalRegistros" : 1021,
+		"mes" : 4
+	},
+	{
+		"totalRegistros" : 1065,
+		"mes" : 5
+	},
+	{
+		"totalRegistros" : 929,
+		"mes" : 6
+	},
+	{
+		"totalRegistros" : 868,
+		"mes" : 7
+	},
+	{
+		"totalRegistros" : 944,
+		"mes" : 8
+	},
+	{
+		"totalRegistros" : 715,
+		"mes" : 9
+	}
+]
+Nota: MongoDB numera domingo como 1 y sábado como 7.
