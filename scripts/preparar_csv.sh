@@ -11,7 +11,7 @@ if [ ! -f "$ARCHIVO_ORIGINAL" ]; then
   exit 1
 fi
 
-sed '1s/^\xEF\xBB\xBF//' "$ARCHIVO_ORIGINAL" > "$ARCHIVO_LIMPIO"
+sed '1s/^\xEF\xBB\xBF//; s/\r$//' "$ARCHIVO_ORIGINAL" > "$ARCHIVO_LIMPIO"
 
 echo "Archivo limpio creado correctamente:"
 echo "$ARCHIVO_LIMPIO"
