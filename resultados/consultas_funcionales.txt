@@ -1,0 +1,232 @@
+=== CONSULTA 1: CLASIFICACIONES MÁS FRECUENTES ===
+[
+	{
+		"totalRegistros" : 37331,
+		"clasificacionDelito" : "VEHICLE THEFT"
+	},
+	{
+		"totalRegistros" : 27816,
+		"clasificacionDelito" : "HOME ROBBERY"
+	},
+	{
+		"totalRegistros" : 26985,
+		"clasificacionDelito" : "OTHER NONVIOLENT ROBBERIES"
+	},
+	{
+		"totalRegistros" : 20977,
+		"clasificacionDelito" : "MALICIOUS INJURY"
+	},
+	{
+		"totalRegistros" : 18277,
+		"clasificacionDelito" : "ROBBERY WITH VIOLENCE TO COMMERCE"
+	},
+	{
+		"totalRegistros" : 10420,
+		"clasificacionDelito" : "SIMPLE THEFT (ON PUBLIC ROADS)"
+	},
+	{
+		"totalRegistros" : 9914,
+		"clasificacionDelito" : "ROBBERY WITH VIOLENCE (IN PUBLIC STREETS)"
+	},
+	{
+		"totalRegistros" : 7228,
+		"clasificacionDelito" : "ROBBERY TO COMMERCE"
+	},
+	{
+		"totalRegistros" : 5930,
+		"clasificacionDelito" : "CULPABLE INJURIES"
+	},
+	{
+		"totalRegistros" : 3790,
+		"clasificacionDelito" : "OTHER ROBBERIES WITH VIOLENCE"
+	}
+]
+=== CONSULTA 2: REGISTROS POR AÑO ===
+[
+	{
+		"totalRegistros" : 24480,
+		"anio" : 2014
+	},
+	{
+		"totalRegistros" : 22743,
+		"anio" : 2015
+	},
+	{
+		"totalRegistros" : 20466,
+		"anio" : 2016
+	},
+	{
+		"totalRegistros" : 20030,
+		"anio" : 2017
+	},
+	{
+		"totalRegistros" : 16114,
+		"anio" : 2018
+	},
+	{
+		"totalRegistros" : 14204,
+		"anio" : 2019
+	},
+	{
+		"totalRegistros" : 11749,
+		"anio" : 2020
+	},
+	{
+		"totalRegistros" : 12672,
+		"anio" : 2021
+	},
+	{
+		"totalRegistros" : 13912,
+		"anio" : 2022
+	},
+	{
+		"totalRegistros" : 10348,
+		"anio" : 2023
+	},
+	{
+		"totalRegistros" : 8764,
+		"anio" : 2024
+	}
+]
+=== CONSULTA 3: REGISTROS POR HORA ===
+[
+	{
+		"totalRegistros" : 11895,
+		"hora" : 12
+	},
+	{
+		"totalRegistros" : 11533,
+		"hora" : 8
+	},
+	{
+		"totalRegistros" : 9140,
+		"hora" : 10
+	},
+	{
+		"totalRegistros" : 8725,
+		"hora" : 0
+	},
+	{
+		"totalRegistros" : 8510,
+		"hora" : 20
+	},
+	{
+		"totalRegistros" : 8426,
+		"hora" : 21
+	},
+	{
+		"totalRegistros" : 7994,
+		"hora" : 18
+	},
+	{
+		"totalRegistros" : 7692,
+		"hora" : 19
+	},
+	{
+		"totalRegistros" : 7679,
+		"hora" : 7
+	},
+	{
+		"totalRegistros" : 7562,
+		"hora" : 22
+	},
+	{
+		"totalRegistros" : 7187,
+		"hora" : 15
+	},
+	{
+		"totalRegistros" : 7181,
+		"hora" : 17
+	},
+	{
+		"totalRegistros" : 7034,
+		"hora" : 9
+	},
+	{
+		"totalRegistros" : 6859,
+		"hora" : 16
+	},
+	{
+		"totalRegistros" : 6611,
+		"hora" : 23
+	},
+	{
+		"totalRegistros" : 6602,
+		"hora" : 11
+	},
+	{
+		"totalRegistros" : 6501,
+		"hora" : 14
+	},
+	{
+		"totalRegistros" : 6485,
+		"hora" : 6
+	},
+	{
+		"totalRegistros" : 6325,
+		"hora" : 13
+	},
+	{
+		"totalRegistros" : 5452,
+		"hora" : 5
+	},
+	{
+		"totalRegistros" : 5436,
+		"hora" : 3
+	},
+	{
+		"totalRegistros" : 5134,
+		"hora" : 4
+	},
+	{
+		"totalRegistros" : 4787,
+		"hora" : 1
+	},
+	{
+		"totalRegistros" : 4732,
+		"hora" : 2
+	}
+]
+=== CONSULTA 4: LUGARES CON MÁS ROBOS DE VEHÍCULO ===
+[
+	{
+		"totalRegistros" : 968,
+		"lugar" : "INDEPENDENCIA"
+	},
+	{
+		"totalRegistros" : 899,
+		"lugar" : "GONZALEZ ORTEGA"
+	},
+	{
+		"totalRegistros" : 847,
+		"lugar" : "NUEVA"
+	},
+	{
+		"totalRegistros" : 824,
+		"lugar" : "VALLE DEL PEDREGAL"
+	},
+	{
+		"totalRegistros" : 737,
+		"lugar" : "CENTRO CIVICO"
+	},
+	{
+		"totalRegistros" : 711,
+		"lugar" : "PRIMERA SECCION"
+	},
+	{
+		"totalRegistros" : 618,
+		"lugar" : "NUEVO MEXICALI"
+	},
+	{
+		"totalRegistros" : 522,
+		"lugar" : "VALLE DE PUEBLA"
+	},
+	{
+		"totalRegistros" : 505,
+		"lugar" : "HIDALGO"
+	},
+	{
+		"totalRegistros" : 463,
+		"lugar" : "PROHOGAR"
+	}
+]
