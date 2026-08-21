@@ -28,7 +28,7 @@
 {
 	"nombre" : "Registro cercano con clasificación diferente",
 	"documentoControl" : {
-		"_id" : ObjectId("6a8291dca4a31c6619efdb26"),
+		"_id" : ObjectId("6a87dcaf70155978397dbce7"),
 		"clasificacionDelito" : "CULPABLE INJURIES",
 		"fechaOcurrencia" : ISODate("2023-06-25T10:44:00Z"),
 		"lugar" : {

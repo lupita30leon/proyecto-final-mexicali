@@ -1,29 +1,314 @@
-[PEGAR AQUÍ LA SALIDA REAL]
-
-Este archivo debe reemplazarse por la salida real de ejecutar, dentro de
-AWS Academy Learner Lab:
-
-    mongosh "$(mongodb_database_url)" --quiet scripts/seguridad_roles_acceso.js \
-      | tee resultados/seguridad_roles_acceso.txt
-
-Qué debe mostrar el resultado pegado aquí:
-
-1. El diagnóstico de si "security.authorization" está en "enabled" en el
-   servidor usado.
-2. Los cuatro roles creados (rol_lectura_publica, rol_analista_interno,
-   rol_carga_datos, rol_administrador_indices) con sus privilegios,
-   obtenidos mediante curso.getRoles({ showPrivileges: true }).
-3. Si se definieron las variables de entorno PASSWORD_ANALISTA y
-   PASSWORD_LECTURA antes de ejecutar el script:
-   - Si el servidor NO tiene autenticación activa (caso esperado en el
-     Learner Lab): el aviso explícito de que los roles quedaron
-     diseñados pero no exigibles.
-   - Si el equipo habilitó "security.authorization: enabled" en un
-     servidor de prueba propio: la comprobación real de que el usuario
-     de sólo lectura pudo hacer find() sobre vista_publica_delitos pero
-     NO pudo hacer insertOne() sobre delitos_mexicali (mensaje de error
-     "not authorized on m6_nosql to execute command ...").
-
-No pegar aquí ninguna contraseña real, aunque sea temporal. Las
-variables de entorno usadas para la prueba deben ser valores de un solo
-uso y no deben reutilizarse en ningún otro sistema.
+=== 1. DIAGNÓSTICO DEL ENTORNO ===
+{ "authorizationConfigurado" : "no definido", "autenticacionActiva" : false }
+AVISO: este servidor MongoDB Community del Learner Lab no tiene 'security.authorization: enabled'. Por lo tanto, cualquier rol que se cree a continuación queda DISEÑADO pero NO EXIGIBLE: el motor no rechazará ninguna operación aunque un usuario real esté vinculado a un rol de sólo lectura. Esta distinción se documenta explícitamente en documentacion/07_seguridad_privacidad.md.
+=== 2. DEFINICIÓN DE ROLES CON PRIVILEGIO MÍNIMO ===
+{
+	"role" : "rol_lectura_publica",
+	"privileges" : [
+		{
+			"resource" : {
+				"db" : "m6_nosql",
+				"collection" : "vista_publica_delitos"
+			},
+			"actions" : [
+				"find"
+			]
+		}
+	],
+	"roles" : [ ]
+}
+Rol creado: rol_lectura_publica
+{
+	"role" : "rol_analista_interno",
+	"privileges" : [
+		{
+			"resource" : {
+				"db" : "m6_nosql",
+				"collection" : "delitos_mexicali"
+			},
+			"actions" : [
+				"find"
+			]
+		}
+	],
+	"roles" : [ ]
+}
+Rol creado: rol_analista_interno
+{
+	"role" : "rol_carga_datos",
+	"privileges" : [
+		{
+			"resource" : {
+				"db" : "m6_nosql",
+				"collection" : "delitos_mexicali"
+			},
+			"actions" : [
+				"find",
+				"insert"
+			]
+		}
+	],
+	"roles" : [ ]
+}
+Rol creado: rol_carga_datos
+{
+	"role" : "rol_administrador_indices",
+	"privileges" : [
+		{
+			"resource" : {
+				"db" : "m6_nosql",
+				"collection" : "delitos_mexicali"
+			},
+			"actions" : [
+				"createIndex",
+				"dropIndex",
+				"collMod",
+				"listIndexes"
+			]
+		}
+	],
+	"roles" : [ ]
+}
+Rol creado: rol_administrador_indices
+=== 3. ROLES DISPONIBLES EN m6_nosql ===
+[
+	{
+		"role" : "administrador_estructura",
+		"db" : "m6_nosql",
+		"isBuiltin" : false,
+		"roles" : [ ],
+		"inheritedRoles" : [ ],
+		"privileges" : [
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "casos_protegidos"
+				},
+				"actions" : [
+					"collMod",
+					"createIndex",
+					"dropIndex",
+					"listIndexes"
+				]
+			}
+		],
+		"inheritedPrivileges" : [
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "casos_protegidos"
+				},
+				"actions" : [
+					"collMod",
+					"createIndex",
+					"dropIndex",
+					"listIndexes"
+				]
+			}
+		]
+	},
+	{
+		"role" : "analista_protegido",
+		"db" : "m6_nosql",
+		"isBuiltin" : false,
+		"roles" : [ ],
+		"inheritedRoles" : [ ],
+		"privileges" : [
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "casos_analitica"
+				},
+				"actions" : [
+					"find"
+				]
+			}
+		],
+		"inheritedPrivileges" : [
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "casos_analitica"
+				},
+				"actions" : [
+					"find"
+				]
+			}
+		]
+	},
+	{
+		"role" : "auditor_casos",
+		"db" : "m6_nosql",
+		"isBuiltin" : false,
+		"roles" : [ ],
+		"inheritedRoles" : [ ],
+		"privileges" : [
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "casos_protegidos"
+				},
+				"actions" : [
+					"find"
+				]
+			},
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "evidencias_protegidas"
+				},
+				"actions" : [
+					"find"
+				]
+			}
+		],
+		"inheritedPrivileges" : [
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "casos_protegidos"
+				},
+				"actions" : [
+					"find"
+				]
+			},
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "evidencias_protegidas"
+				},
+				"actions" : [
+					"find"
+				]
+			}
+		]
+	},
+	{
+		"role" : "rol_administrador_indices",
+		"db" : "m6_nosql",
+		"isBuiltin" : false,
+		"roles" : [ ],
+		"inheritedRoles" : [ ],
+		"privileges" : [
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "delitos_mexicali"
+				},
+				"actions" : [
+					"collMod",
+					"createIndex",
+					"dropIndex",
+					"listIndexes"
+				]
+			}
+		],
+		"inheritedPrivileges" : [
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "delitos_mexicali"
+				},
+				"actions" : [
+					"collMod",
+					"createIndex",
+					"dropIndex",
+					"listIndexes"
+				]
+			}
+		]
+	},
+	{
+		"role" : "rol_analista_interno",
+		"db" : "m6_nosql",
+		"isBuiltin" : false,
+		"roles" : [ ],
+		"inheritedRoles" : [ ],
+		"privileges" : [
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "delitos_mexicali"
+				},
+				"actions" : [
+					"find"
+				]
+			}
+		],
+		"inheritedPrivileges" : [
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "delitos_mexicali"
+				},
+				"actions" : [
+					"find"
+				]
+			}
+		]
+	},
+	{
+		"role" : "rol_carga_datos",
+		"db" : "m6_nosql",
+		"isBuiltin" : false,
+		"roles" : [ ],
+		"inheritedRoles" : [ ],
+		"privileges" : [
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "delitos_mexicali"
+				},
+				"actions" : [
+					"find",
+					"insert"
+				]
+			}
+		],
+		"inheritedPrivileges" : [
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "delitos_mexicali"
+				},
+				"actions" : [
+					"find",
+					"insert"
+				]
+			}
+		]
+	},
+	{
+		"role" : "rol_lectura_publica",
+		"db" : "m6_nosql",
+		"isBuiltin" : false,
+		"roles" : [ ],
+		"inheritedRoles" : [ ],
+		"privileges" : [
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "vista_publica_delitos"
+				},
+				"actions" : [
+					"find"
+				]
+			}
+		],
+		"inheritedPrivileges" : [
+			{
+				"resource" : {
+					"db" : "m6_nosql",
+					"collection" : "vista_publica_delitos"
+				},
+				"actions" : [
+					"find"
+				]
+			}
+		]
+	}
+]
+=== 4. CREACIÓN DE USUARIOS DE PRUEBA (SÓLO SI HAY CREDENCIALES) ===
+Este shell no expone variables de entorno de Node (typeof process === "undefined"). No se crearán usuarios de prueba. Los roles quedan diseñados y verificables mediante curso.getRoles(), pero la denegación de privilegios NO se comprobó en esta ejecución.
+=== 6. LIMPIEZA DE ROLES DE PRUEBA (OPCIONAL) ===
+Los roles y usuarios creados en esta ejecución son de prueba y pueden eliminarse con curso.dropRole(nombre) / curso.dropUser(nombre) una vez capturada la evidencia para el reporte.

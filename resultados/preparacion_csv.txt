@@ -1,6 +1,6 @@
 Archivo limpio creado correctamente:
-/mnt/vocwork2/work/eee_W_6522809/asn5570907_1/asn5570908_1/work/proyecto-final-mexicali/datos/crimes_mxl_limpio.csv
+/mnt/vocwork4/work/eee_W_6509363/asn5570907_1/asn5570908_1/work/proyecto-final-mexicali/datos/crimes_mxl_limpio.csv
 Cantidad de líneas:
-175483 /mnt/vocwork2/work/eee_W_6522809/asn5570907_1/asn5570908_1/work/proyecto-final-mexicali/datos/crimes_mxl_limpio.csv
+175483 /mnt/vocwork4/work/eee_W_6509363/asn5570907_1/asn5570908_1/work/proyecto-final-mexicali/datos/crimes_mxl_limpio.csv
 Encabezado:
 CRIME_CLASSIFICATION,CRIME_SCENE,REGISTRATION_DATE,OCCURRED_DATE,CRIME_TIME,MUNICIPALITY,TYPE,X,Y

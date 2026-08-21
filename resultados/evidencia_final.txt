@@ -126,10 +126,20 @@
 	"comprobacion" : "Hay 9513 robos de vehículo dentro de cinco kilómetros",
 	"resultado" : "CORRECTO"
 }
+{
+	"numero" : 12,
+	"comprobacion" : "Existe la vista protegida vista_publica_delitos",
+	"resultado" : "CORRECTO"
+}
+{
+	"numero" : 13,
+	"comprobacion" : "Los cuatro roles de privilegio mínimo están definidos",
+	"resultado" : "CORRECTO"
+}
 === RESUMEN FINAL ===
 {
-	"totalComprobaciones" : 11,
-	"comprobacionesCorrectas" : 11,
+	"totalComprobaciones" : 13,
+	"comprobacionesCorrectas" : 13,
 	"comprobacionesConFalla" : 0,
 	"resultadoGeneral" : "PROYECTO VERIFICADO CORRECTAMENTE"
 }

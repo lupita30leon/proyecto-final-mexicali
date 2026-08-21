@@ -18,7 +18,7 @@
 ]
 === DOCUMENTO DE CONTROL EN MIRASOL ===
 {
-	"_id" : ObjectId("6a8291dda4a31c6619f01232"),
+	"_id" : ObjectId("6a87dcb070155978397df3f3"),
 	"clasificacionDelito" : "VEHICLE THEFT",
 	"fechaOcurrencia" : ISODate("2024-09-25T21:00:00Z"),
 	"lugar" : {
