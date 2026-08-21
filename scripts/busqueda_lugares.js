@@ -18,49 +18,78 @@ if (delitos.countDocuments({}) !== 175482) {
   );
 }
 
-print("=== CASO 1: PREFIJO ANCLADO (PUEDE USAR EL ÍNDICE) ===");
+function obtenerEtapas(plan, resultado) {
+  if (!plan || typeof plan !== "object") {
+    return;
+  }
 
-// Un patrón anclado al inicio ("^") sobre el primer campo de
-// idx_lugar_fecha_id puede aprovechar el índice como si fuera una
-// búsqueda por rango de cadenas, porque MongoDB puede acotar el
-// recorrido del árbol B a las entradas que comienzan con ese prefijo.
+  if (plan.stage) {
+    resultado.push(plan.stage);
+  }
+
+  Object.keys(plan).forEach(function (clave) {
+    var valor = plan[clave];
+
+    if (valor && typeof valor === "object") {
+      if (Array.isArray(valor)) {
+        valor.forEach(function (elemento) {
+          obtenerEtapas(elemento, resultado);
+        });
+      } else {
+        obtenerEtapas(valor, resultado);
+      }
+    }
+  });
+}
+
+function resumenExplain(patron, explicacion) {
+  var etapas = [];
+  obtenerEtapas(explicacion.queryPlanner.winningPlan, etapas);
+
+  return {
+    patron: patron,
+    etapas: etapas,
+    totalKeysExamined: explicacion.executionStats.totalKeysExamined,
+    totalDocsExamined: explicacion.executionStats.totalDocsExamined,
+    nReturned: explicacion.executionStats.nReturned
+  };
+}
+
+print("=== CASO 1: PREFIJO ANCLADO, INSENSIBLE A MAYÚSCULAS ===");
+
+// Un patrón anclado al inicio ("^") podría, en teoría, acotar el
+// recorrido del índice idx_lugar_fecha_id a un rango de cadenas. En la
+// práctica, la bandera "i" (insensible a mayúsculas) le impide a
+// MongoDB calcular ese rango acotado: el motor sigue eligiendo el
+// índice (IXSCAN, evita un COLLSCAN sobre 175,482 documentos), pero
+// recorre casi todas sus entradas para evaluar el patrón contra cada
+// valor indexado. Esto se comprueba con la evidencia real más abajo:
+// totalKeysExamined queda cerca del total de la colección, no acotado
+// a las entradas que empiezan con "VALLE".
 var prefijoExplain = delitos
   .find({ "lugar.nombre": /^VALLE/i })
   .explain("executionStats");
 
-printjson({
-  patron: "/^VALLE/i",
-  etapaPrincipal:
-    prefijoExplain.queryPlanner.winningPlan.inputStage
-      ? prefijoExplain.queryPlanner.winningPlan.inputStage.stage
-      : prefijoExplain.queryPlanner.winningPlan.stage,
-  totalKeysExamined: prefijoExplain.executionStats.totalKeysExamined,
-  totalDocsExamined: prefijoExplain.executionStats.totalDocsExamined,
-  nReturned: prefijoExplain.executionStats.nReturned
-});
+printjson(resumenExplain("/^VALLE/i", prefijoExplain));
 
 print("Lugares distintos que coinciden con /^VALLE/i:");
 printjson(delitos.distinct("lugar.nombre", { "lugar.nombre": /^VALLE/i }));
 
-print("=== CASO 2: SUBCADENA SIN ANCLAR (NO USA EL ÍNDICE, RECORRE TODO) ===");
+print("=== CASO 2: SUBCADENA SIN ANCLAR ===");
 
-// Un patrón sin anclar no puede acotarse a un rango del índice: MongoDB
-// debe revisar cada entrada para decidir si la subcadena aparece en
-// cualquier posición. Se documenta el costo, no se oculta.
+// Un patrón sin anclar tampoco puede acotarse a un rango del índice:
+// la coincidencia puede estar en cualquier posición del nombre. Aun
+// así, MongoDB puede resolverlo con IXSCAN en vez de COLLSCAN, porque
+// evalúa el patrón directamente contra el valor indexado (sin abrir el
+// documento) y sólo ejecuta FETCH sobre los documentos que sí
+// coinciden. Por eso totalDocsExamined puede ser mucho menor que
+// totalKeysExamined: el índice sigue evitando fetches innecesarios,
+// aunque no evite recorrer casi todas sus entradas.
 var subcadenaExplain = delitos
   .find({ "lugar.nombre": /PEDREGAL/i })
   .explain("executionStats");
 
-printjson({
-  patron: "/PEDREGAL/i",
-  etapaPrincipal:
-    subcadenaExplain.queryPlanner.winningPlan.inputStage
-      ? subcadenaExplain.queryPlanner.winningPlan.inputStage.stage
-      : subcadenaExplain.queryPlanner.winningPlan.stage,
-  totalKeysExamined: subcadenaExplain.executionStats.totalKeysExamined,
-  totalDocsExamined: subcadenaExplain.executionStats.totalDocsExamined,
-  nReturned: subcadenaExplain.executionStats.nReturned
-});
+printjson(resumenExplain("/PEDREGAL/i", subcadenaExplain));
 
 print("Lugares distintos que coinciden con /PEDREGAL/i:");
 printjson(delitos.distinct("lugar.nombre", { "lugar.nombre": /PEDREGAL/i }));

@@ -54,7 +54,10 @@ function definirRol(nombre, privilegios) {
   });
 
   print("Rol creado: " + nombre);
-  printjson(resultado);
+
+  if (resultado !== undefined) {
+    printjson(resultado);
+  }
 
   return resultado;
 }
@@ -118,10 +121,22 @@ printjson(curso.getRoles({ showPrivileges: true }));
 
 print("=== 4. CREACIÓN DE USUARIOS DE PRUEBA (SÓLO SI HAY CREDENCIALES) ===");
 
-var passwordAnalista = process.env.PASSWORD_ANALISTA;
-var passwordLectura = process.env.PASSWORD_LECTURA;
+// "process" sólo existe cuando el script corre con mongosh moderno sobre
+// Node.js. El shell legado "mongo" (usado en algunos entornos del
+// Learner Lab) no define ese objeto global. El "typeof" evita que la
+// simple referencia truene con un ReferenceError en ese shell.
+var tieneProcess = typeof process !== "undefined" && !!process.env;
+var passwordAnalista = tieneProcess ? process.env.PASSWORD_ANALISTA : null;
+var passwordLectura = tieneProcess ? process.env.PASSWORD_LECTURA : null;
 
-if (!passwordAnalista || !passwordLectura) {
+if (!tieneProcess) {
+  print(
+    "Este shell no expone variables de entorno de Node (typeof process " +
+    "=== \"undefined\"). No se crearán usuarios de prueba. Los roles " +
+    "quedan diseñados y verificables mediante curso.getRoles(), pero la " +
+    "denegación de privilegios NO se comprobó en esta ejecución."
+  );
+} else if (!passwordAnalista || !passwordLectura) {
   print(
     "No se definieron PASSWORD_ANALISTA / PASSWORD_LECTURA como " +
     "variables de entorno. No se crearán usuarios de prueba. Los roles " +

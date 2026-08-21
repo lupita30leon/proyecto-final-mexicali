@@ -339,12 +339,14 @@ El año 2024 contiene solamente información hasta septiembre, por lo que no rep
 
 Se implementó búsqueda estructurada con `$regex` sobre `lugar.nombre`, en lugar de `$text`, porque el campo es un nombre propio corto (una colonia o fraccionamiento) y no texto libre. El detalle de la justificación está en [Búsqueda](documentacion/10_busqueda.md).
 
-| Caso | Patrón | Usa el índice | Qué demuestra |
-|---|---|---|---|
-| Prefijo anclado | `/^VALLE/i` | Sí | Aprovecha `idx_lugar_fecha_id` como si fuera un rango de cadenas |
-| Subcadena sin anclar | `/PEDREGAL/i` | No | Coincidencia parcial en cualquier posición, con su costo documentado |
-| Combinado con filtro temático | `/PEDREGAL/i` + `VEHICLE THEFT` | No | La búsqueda por patrón se integra con los filtros ya usados en el proyecto |
-| Control de exclusión | `/ZZZZ_COLONIA_INEXISTENTE/i` | No aplica | Confirma 0 coincidencias para un patrón inexistente |
+La evidencia real (no sólo teórica) mostró algo que vale la pena señalar: ni el patrón anclado ni el patrón sin anclar logran acotar `totalKeysExamined` al usar la bandera `i` (insensible a mayúsculas), porque esa bandera le impide al planificador calcular un rango de índice. Ambos casos recorren prácticamente el índice completo (175,463 llaves); la diferencia real está en cuántos documentos requieren `FETCH` después.
+
+| Caso | Patrón | Etapas | Keys examinadas | Docs examinados (FETCH) | Qué demuestra |
+|---|---|---|---:|---:|---|
+| Prefijo anclado | `/^VALLE/i` | FETCH, IXSCAN | 175,463 | 10,297 | El anclaje no basta para acotar el índice cuando la búsqueda es insensible a mayúsculas |
+| Subcadena sin anclar | `/PEDREGAL/i` | FETCH, IXSCAN | 175,463 | 3,605 | El índice reduce el `FETCH`, no el recorrido de llaves |
+| Combinado con filtro temático | `/PEDREGAL/i` + `VEHICLE THEFT` | Igual que el caso anterior + filtro de igualdad | — | — | La búsqueda por patrón se integra con los filtros ya usados en el proyecto |
+| Control de exclusión | `/ZZZZ_COLONIA_INEXISTENTE/i` | No aplica | 0 | 0 | Confirma 0 coincidencias para un patrón inexistente |
 
 ## Evidencia final
 

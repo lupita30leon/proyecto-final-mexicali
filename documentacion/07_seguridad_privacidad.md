@@ -119,6 +119,8 @@ mongosh "$(mongodb_database_url)" --quiet scripts/seguridad_roles_acceso.js
 
 Si esas variables no están definidas, el script diseña los roles pero **no** crea usuarios, para no dejar cuentas con contraseñas vacías o previsibles como efecto colateral de una ejecución de prueba.
 
+En la ejecución real del equipo, el shell del Learner Lab no expone `process.env` (comportamiento típico del shell `mongo` clásico, a diferencia de `mongosh` sobre Node.js). El script comprueba `typeof process !== "undefined"` antes de leerlo, así que en ese caso simplemente informa que no puede leer variables de entorno y continúa sin crear usuarios, en vez de fallar. El resultado práctico es el mismo que si las variables no estuvieran definidas: los cuatro roles quedan diseñados y verificables, sin usuarios de prueba.
+
 El repositorio no debe contener, bajo ninguna circunstancia:
 
 - Contraseñas.

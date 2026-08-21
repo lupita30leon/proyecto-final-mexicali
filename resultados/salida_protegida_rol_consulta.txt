@@ -1,25 +1,85 @@
-[PEGAR AQUÍ LA SALIDA REAL]
+=== 1. DOCUMENTO CRUDO (NIVEL INTERNO, NO PARA ROL DE CONSULTA) ===
+{
+	"_id" : ObjectId("6a87dcb070155978397df3f3"),
+	"clasificacionDelito" : "VEHICLE THEFT",
+	"fechaRegistro" : ISODate("2024-09-26T00:00:00Z"),
+	"fechaOcurrencia" : ISODate("2024-09-25T21:00:00Z"),
+	"lugar" : {
+		"municipio" : "MEXICALI",
+		"nombre" : "MIRASOL",
+		"tipo" : "SUBDIVISION"
+	},
+	"ubicacion" : {
+		"type" : "Point",
+		"coordinates" : [
+			-115.3862048,
+			32.60621895
+		]
+	}
+}
+=== 2. VISTA PROTEGIDA vista_publica_delitos ===
+Vista creada correctamente.
+=== 3. FILA CORRESPONDIENTE EN LA VISTA PROTEGIDA ===
+{
+	"totalRegistros" : 1,
+	"clasificacionDelito" : "VEHICLE THEFT",
+	"colonia" : "MIRASOL",
+	"periodo" : "2024-09"
+}
+=== 4. COMPARACIÓN: QUÉ SE EXCLUYÓ, GENERALIZÓ O ENMASCARÓ ===
+{
+	"_id" : {
+		"documentoCrudo" : "presente",
+		"vistaProtegida" : "excluido"
+	},
+	"fechaOcurrencia" : {
+		"documentoCrudo" : "marca de tiempo exacta",
+		"vistaProtegida" : "generalizada a año-mes (2024-09)"
+	},
+	"ubicacion" : {
+		"documentoCrudo" : "coordenadas GeoJSON exactas",
+		"vistaProtegida" : "excluida; sólo se conserva el nombre de colonia"
+	},
+	"nivelDeAgregacion" : {
+		"documentoCrudo" : "un evento individual",
+		"vistaProtegida" : "conteo agregado de 1 registros que comparten clasificación, colonia y mes"
+	}
+}
+=== 5. COMPROBACIÓN: LA VISTA NO EXPONE DOCUMENTOS INDIVIDUALES ===
+Correcto: la vista protegida sólo expone totalRegistros, clasificacionDelito, colonia, periodo, ninguno de ellos identifica un evento individual.
+=== 6. RESULTADO DE MUESTRA PARA UN ROL DE CONSULTA ===
+[
+	{
+		"totalRegistros" : 31,
+		"clasificacionDelito" : "VEHICLE THEFT",
+		"colonia" : "NUEVA",
+		"periodo" : "2015-06"
+	},
+	{
+		"totalRegistros" : 23,
+		"clasificacionDelito" : "VEHICLE THEFT",
+		"colonia" : "GONZALEZ ORTEGA",
+		"periodo" : "2015-10"
+	},
+	{
+		"totalRegistros" : 22,
+		"clasificacionDelito" : "VEHICLE THEFT",
+		"colonia" : "CENTRO CIVICO",
+		"periodo" : "2014-09"
+	},
+	{
+		"totalRegistros" : 22,
+		"clasificacionDelito" : "VEHICLE THEFT",
+		"colonia" : "CENTRO CIVICO",
+		"periodo" : "2014-01"
+	},
+	{
+		"totalRegistros" : 22,
+		"clasificacionDelito" : "VEHICLE THEFT",
+		"colonia" : "GONZALEZ ORTEGA",
+		"periodo" : "2017-02"
+	}
+]
 
-Este archivo debe reemplazarse por la salida real de ejecutar, dentro de
-AWS Academy Learner Lab:
-
-    mongosh "$(mongodb_database_url)" --quiet scripts/salida_protegida_rol_consulta.js \
-      | tee resultados/salida_protegida_rol_consulta.txt
-
-Qué debe mostrar el resultado pegado aquí:
-
-1. Un documento crudo de MIRASOL con _id, fecha exacta y coordenadas
-   GeoJSON completas (nivel interno).
-2. La confirmación de creación de la vista "vista_publica_delitos".
-3. La fila equivalente dentro de la vista protegida: sin _id, con la
-   fecha generalizada a "año-mes" y sin coordenadas, mostrando en su
-   lugar sólo el nombre de colonia y un conteo agregado.
-4. La comparación explícita campo por campo (documento crudo vs. vista
-   protegida) que produce el paso 4 del script.
-5. La comprobación automática de que la vista no expone _id, ubicacion,
-   fechaOcurrencia ni fechaRegistro.
-6. Una muestra de 5 filas de la vista para el rol de consulta.
-
-Esta salida es la evidencia directa del punto 6 de la lista de
-integración de la guía de semanas 4-5: "salida protegida o minimizada
-para un rol de consulta".
+Ejecutado en AWS Academy Learner Lab, MongoDB Community, sobre la
+colección delitos_mexicali con 175,482 documentos.
