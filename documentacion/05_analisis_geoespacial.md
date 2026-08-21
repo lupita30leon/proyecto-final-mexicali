@@ -53,6 +53,16 @@ Se utilizó como referencia una coordenada asociada con MIRASOL dentro de la pro
 }
 ```
 
+### ¿Por qué Mirasol y no otro punto?
+
+Mirasol se eligió por tres razones concretas, no porque se le identificara previamente como la zona de mayor incidencia:
+
+1. **Es la misma referencia usada desde el modelo documental.** El documento de ejemplo definido en `documentacion/00_planteamiento_problema.md` y en el resto del proyecto ya usaba un registro real de MIRASOL. Reutilizar esa misma coordenada, en lugar de introducir una nueva, evita mezclar un punto inventado con datos reales y mantiene la trazabilidad entre el modelo documental y el análisis geoespacial.
+2. **Permite construir un caso de control verificable.** Varios eventos de MIRASOL comparten exactamente la misma coordenada dentro de la fuente. Eso permite construir y reconocer manualmente un documento de control (sección "Control del filtro temático") cuya distancia esperada es cero, algo mucho más difícil de verificar a mano con un punto arbitrario fuera de la fuente.
+3. **Es una ubicación real dentro del municipio, sin ser un caso extremo.** MIRASOL se encuentra dentro de los intervalos de longitud y latitud observados en el resto de la colección, por lo que el radio de 5 km alrededor de ese punto cruza varias colonias vecinas y no queda en el borde del área cubierta por los datos.
+
+**Lo que esta elección no significa:** no se comparó la incidencia de MIRASOL contra la de otras colonias antes de elegirla, por lo que su selección **no** es en sí misma un hallazgo de que ahí se concentre más delito. Es un punto de referencia elegido por reproducibilidad y trazabilidad, análogo a fijar un origen de coordenadas para poder medir distancias, no un resultado del análisis.
+
 Este punto se eligió para construir un caso de control reproducible. No corresponde a un domicilio personal proporcionado por el equipo.
 
 ## Índice geoespacial
@@ -109,6 +119,22 @@ Los resultados fueron:
 | Distancia máxima observada | 4,989.75 metros |
 
 Los 9,513 registros corresponden al subconjunto de robos de vehículo con coordenadas localizadas dentro del radio de cinco kilómetros. El resultado es un conteo y no una tasa de incidencia.
+
+### ¿Qué pregunta del problema responde este resultado?
+
+Este resultado responde directamente a la pregunta 5 planteada en `documentacion/00_planteamiento_problema.md`: *¿cuántos registros de robo de vehículo se encuentran dentro de cinco kilómetros de una ubicación de referencia registrada en Mirasol?* Es la pregunta del proyecto que requiere explícitamente una relación de **proximidad geométrica** (no de pertenencia a una colonia ni de intersección de polígonos), por lo que es la que justificó incorporar el componente geoespacial en primer lugar (ver la tabla de pertinencia en la sección "Pertinencia del análisis geoespacial" del planteamiento del problema).
+
+En términos de las personas usuarias descritas en el planteamiento (personal de planeación y evaluación de seguridad pública, analistas territoriales), el resultado sirve para un uso muy específico y acotado: **dimensionar cuántos reportes de un tipo delictivo caen dentro de un radio operativo fijo alrededor de un punto**, por ejemplo para explorar la cobertura de un radio de patrullaje o de atención, no para calificar la zona.
+
+### Por qué esto no equivale a "mayor riesgo"
+
+El resultado no permite, por sí mismo, afirmar que MIRASOL o su entorno tengan mayor riesgo que otra zona de Mexicali, por tres razones concretas:
+
+1. **No hay denominador de exposición.** El proyecto no cuenta con población, número de vehículos registrados, flujo vehicular ni extensión territorial por colonia. Sin un denominador, 9,513 es un conteo absoluto, no una tasa comparable entre zonas.
+2. **No se comparó contra otras zonas.** No se calculó el mismo indicador con un punto de referencia distinto, por lo que no existe una base para ordenar zonas de mayor a menor incidencia.
+3. **La elección de Mirasol fue por reproducibilidad, no por incidencia.** Como se explica en "¿Por qué Mirasol y no otro punto?", el punto se seleccionó por tener un caso de control verificable, no porque un análisis previo lo señalara como el de mayor concentración.
+
+Por estas razones, el resultado se reporta y se debe leer únicamente como: *"9,513 registros de robo de vehículo caen dentro de un radio de 5 km alrededor de un punto de referencia en Mirasol"*, sin adjetivos de riesgo, peligrosidad o comparación implícita con otras colonias.
 
 ## Caso de control excluido
 

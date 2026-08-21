@@ -99,6 +99,26 @@ En la consulta B, MongoDB utiliza el índice para localizar y ordenar los result
 
 En ambas consultas desapareció la etapa `SORT`, porque los índices proporcionan el orden solicitado.
 
+### ¿Por qué la consulta A llega exactamente a 0 documentos y 20 llaves examinadas?
+
+Este resultado suele parecer contradictorio a primera vista: si `nReturned` es 20, ¿cómo puede `totalDocsExamined` ser 0? La explicación depende de comparar, campo por campo, lo que pide la consulta contra lo que contiene el índice `idx_clasificacion_fecha_id`:
+
+| Lo que necesita la consulta A | ¿Lo cubre el índice `{ clasificacionDelito: 1, fechaOcurrencia: -1, _id: 1 }`? |
+|---|---|
+| Filtro de igualdad en `clasificacionDelito` | Sí, es el primer campo del índice |
+| Filtro de rango `[2023-01-01, 2024-01-01)` en `fechaOcurrencia` | Sí, es el segundo campo del índice |
+| Ordenamiento descendente por `fechaOcurrencia` y ascendente por `_id` | Sí, coincide con el orden físico de las entradas del índice |
+| Proyección solicitada: `_id`, `clasificacionDelito`, `fechaOcurrencia` | Sí, los tres campos ya están dentro de las llaves del índice |
+
+Como **los tres campos proyectados por la consulta A ya están contenidos en las llaves del índice**, MongoDB puede resolver la consulta completa leyendo únicamente la estructura del índice (`IXSCAN`), sin necesidad de ir al documento completo en la colección. Esa es la razón de que aparezca la etapa `PROJECTION_COVERED`: es un **índice cubierto** (*covered query*) para esta consulta específica.
+
+De ahí se derivan las dos métricas:
+
+- **`totalKeysExamined = 20`**: MongoDB recorre 20 entradas del índice, exactamente las que corresponden al límite (`limit(20)`) solicitado por la consulta, porque el orden del índice ya coincide con el orden pedido y no necesita revisar entradas adicionales para descartarlas.
+- **`totalDocsExamined = 0`**: como toda la información que la consulta necesita ya viene en esas 20 llaves, MongoDB nunca abre el documento correspondiente en la colección. "Documentos examinados" cuenta lecturas a la colección, no al índice; por eso puede ser 0 aunque se devuelvan 20 resultados.
+
+La consulta B, en cambio, sí pide `"lugar.nombre"`, que **no** forma parte del índice `idx_lugar_fecha_id` como valor devuelto (sólo se usa como llave de búsqueda), por lo que después de localizar las 20 llaves (`totalKeysExamined = 20`) MongoDB debe ejecutar `FETCH` y abrir cada uno de los 20 documentos para poder devolver ese campo (`totalDocsExamined = 20`). Esta comparación entre A y B es precisamente lo que demuestra que la reducción de documentos examinados depende de si la proyección solicitada está o no completamente contenida en el índice, no sólo de que exista un índice.
+
 ## Comprobación de resultados
 
 Las dos mediciones devolvieron 20 documentos. Los identificadores, la primera fecha, la última fecha y el orden de los resultados permanecieron iguales antes y después de crear los índices.

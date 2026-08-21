@@ -111,7 +111,8 @@ proyecto-final-mexicali/
 │   ├── 06_analisis_temporal.md
 │   ├── 07_seguridad_privacidad.md
 │   ├── 08_conclusiones.md
-│   └── 09_verificacion_guias.md
+│   ├── 09_verificacion_guias.md
+│   └── 10_busqueda.md
 ├── resultados/
 │   ├── preparacion_csv.txt
 │   ├── carga_mongodb.txt
@@ -128,7 +129,10 @@ proyecto-final-mexicali/
 │   ├── pruebas_geograficas_adicionales.txt
 │   ├── analisis_temporal.txt
 │   ├── ejecucion_completa.txt
-│   └── evidencia_final.txt
+│   ├── evidencia_final.txt
+│   ├── busqueda_lugares.txt
+│   ├── salida_protegida_rol_consulta.txt
+│   └── seguridad_roles_acceso.txt
 ├── scripts/
 │   ├── preparar_csv.sh
 │   ├── cargar_mongodb.py
@@ -145,6 +149,9 @@ proyecto-final-mexicali/
 │   ├── pruebas_geograficas_adicionales.js
 │   ├── analisis_temporal.js
 │   ├── evidencia_final.js
+│   ├── busqueda_lugares.js
+│   ├── salida_protegida_rol_consulta.js
+│   ├── seguridad_roles_acceso.js
 │   └── ejecutar_proyecto.sh
 ├── .gitignore
 └── README.md
@@ -187,7 +194,10 @@ El ejecutor general realiza las actividades en el orden correcto:
 12. Ejecuta el análisis de proximidad.
 13. Ejecuta las pruebas geográficas adicionales.
 14. Ejecuta el análisis temporal.
-15. Comprueba el resultado final.
+15. Ejecuta la búsqueda de lugares por patrón.
+16. Genera la salida protegida para el rol de consulta.
+17. Diseña los roles y comprueba el control de acceso.
+18. Comprueba el resultado final.
 
 El comando de ejecución es:
 
@@ -245,16 +255,16 @@ Se crearon los siguientes índices:
 }
 ```
 
-Comparación de rendimiento:
+Comparación de rendimiento, con las métricas de `explain("executionStats")` antes y después de crear los índices:
 
-| Consulta | Antes | Después |
-|---|---:|---:|
-| Robo de vehículo durante 2023 | 175,482 documentos examinados | 0 documentos y 20 llaves examinadas |
-| Valle del Pedregal entre 2020 y 2024 | 175,482 documentos examinados | 20 documentos y 20 llaves examinadas |
+| Consulta | Plan antes | nReturned antes | Keys antes | Docs antes | Plan después | nReturned después | Keys después | Docs después |
+|---|---|---:|---:|---:|---|---:|---:|---:|
+| A. Robo de vehículo durante 2023 | `COLLSCAN` + `SORT` | 20 | 0 | 175,482 | `IXSCAN` cubierto (`PROJECTION_COVERED`) | 20 | 20 | 0 |
+| B. Valle del Pedregal entre 2020 y 2024 | `COLLSCAN` + `SORT` | 20 | 0 | 175,482 | `IXSCAN` + `FETCH` | 20 | 20 | 20 |
 
-Antes de crear los índices se utilizó `COLLSCAN`. Después de crearlos se utilizó `IXSCAN`.
+**¿Por qué la consulta A pasa a 0 documentos examinados y 20 llaves examinadas?** Porque los tres campos que la consulta necesita devolver (`_id`, `clasificacionDelito`, `fechaOcurrencia`) ya forman parte de las llaves del índice `idx_clasificacion_fecha_id`. MongoDB puede resolver toda la consulta leyendo únicamente el índice (`totalKeysExamined = 20`, una llave por cada uno de los 20 resultados) sin abrir ningún documento de la colección (`totalDocsExamined = 0`): es un índice cubierto. La consulta B, en cambio, necesita `"lugar.nombre"`, que no es un valor devuelto por su índice, así que MongoDB sí abre los 20 documentos (`FETCH`) después de localizar las 20 llaves. El detalle campo por campo está en [Índices y rendimiento](documentacion/03_indices_rendimiento.md).
 
-Los documentos recuperados fueron los mismos antes y después de la optimización.
+Los documentos recuperados (identificadores, primera y última fecha, orden) fueron los mismos antes y después de la optimización.
 
 ## Validación y calidad
 
@@ -286,7 +296,7 @@ Se ejecutaron once casos de prueba:
 
 ## Análisis geoespacial
 
-Se utilizó como referencia una ubicación registrada en Mirasol:
+Responde la pregunta 5 del proyecto: ¿cuántos robos de vehículo se encuentran dentro de cinco kilómetros de una ubicación de referencia registrada en Mirasol? Se utilizó como referencia una ubicación real de Mirasol porque reutiliza el mismo registro del modelo documental (trazabilidad) y porque varios eventos comparten esa coordenada exacta, lo que permite construir un caso de control verificable a mano. Mirasol **no** se eligió por ser la colonia con más incidencia: esa comparación no se hizo.
 
 ```javascript
 {
@@ -302,6 +312,8 @@ Dentro de un radio de cinco kilómetros se encontraron:
 | Robos de vehículo | 9,513 |
 | Distancia promedio | 2,721.06 metros |
 | Distancia máxima observada | 4,989.75 metros |
+
+Este resultado es un conteo absoluto dentro de un radio fijo, no una tasa ni una medida de riesgo: no existe un denominador de población, vehículos registrados o exposición por zona, y no se comparó contra otros puntos de referencia. El detalle de esta interpretación está en [Análisis geoespacial](documentacion/05_analisis_geoespacial.md).
 
 Algunos documentos comparten exactamente las mismas coordenadas. Por esa razón, varios resultados presentan una distancia de cero metros.
 
@@ -323,6 +335,17 @@ Las horas con mayor cantidad de registros fueron:
 
 El año 2024 contiene solamente información hasta septiembre, por lo que no representa un año completo.
 
+## Búsqueda de lugares
+
+Se implementó búsqueda estructurada con `$regex` sobre `lugar.nombre`, en lugar de `$text`, porque el campo es un nombre propio corto (una colonia o fraccionamiento) y no texto libre. El detalle de la justificación está en [Búsqueda](documentacion/10_busqueda.md).
+
+| Caso | Patrón | Usa el índice | Qué demuestra |
+|---|---|---|---|
+| Prefijo anclado | `/^VALLE/i` | Sí | Aprovecha `idx_lugar_fecha_id` como si fuera un rango de cadenas |
+| Subcadena sin anclar | `/PEDREGAL/i` | No | Coincidencia parcial en cualquier posición, con su costo documentado |
+| Combinado con filtro temático | `/PEDREGAL/i` + `VEHICLE THEFT` | No | La búsqueda por patrón se integra con los filtros ya usados en el proyecto |
+| Control de exclusión | `/ZZZZ_COLONIA_INEXISTENTE/i` | No aplica | Confirma 0 coincidencias para un patrón inexistente |
+
 ## Evidencia final
 
 El script `scripts/evidencia_final.js` comprueba automáticamente:
@@ -335,8 +358,10 @@ El script `scripts/evidencia_final.js` comprueba automáticamente:
 - Configuración del validador.
 - Clasificación más frecuente.
 - Resultado de la consulta de proximidad.
+- Existencia de la vista protegida `vista_publica_delitos`.
+- Existencia de los cuatro roles de privilegio mínimo.
 
-Resultado obtenido:
+Resultado obtenido con las 11 comprobaciones originales (antes de agregar las dos comprobaciones de seguridad anteriores):
 
 ```text
 Total de comprobaciones: 11
@@ -344,6 +369,8 @@ Comprobaciones correctas: 11
 Comprobaciones con falla: 0
 Resultado general: PROYECTO VERIFICADO CORRECTAMENTE
 ```
+
+**Pendiente:** este bloque debe volver a ejecutarse en el Learner Lab después de correr los pasos 15 a 17 del ejecutor, para reemplazarlo por el resultado real con 13 comprobaciones (`resultados/evidencia_final.txt`).
 
 ## Documentación
 
@@ -359,20 +386,36 @@ La explicación detallada de cada etapa se encuentra en:
 - [Seguridad y privacidad](documentacion/07_seguridad_privacidad.md)
 - [Conclusiones](documentacion/08_conclusiones.md)
 - [Verificación de las guías](documentacion/09_verificacion_guias.md)
+- [Búsqueda](documentacion/10_busqueda.md)
 
 ## Seguridad y privacidad
 
-El conjunto no contiene identificadores personales directos. Sin embargo, los datos geográficos y delictivos pueden considerarse sensibles.
+El conjunto no contiene identificadores personales directos. Sin embargo, los datos geográficos y delictivos pueden considerarse sensibles. El detalle completo está en [Seguridad y privacidad](documentacion/07_seguridad_privacidad.md); aquí se resume lo esencial.
 
-Para un ambiente de producción se recomienda implementar:
+**Clasificación de datos.** Cada campo se clasificó como público, interno o sensible, distinguiendo el registro individual del dato ya agregado. `ubicacion.coordinates` a nivel de registro es sensible; `fechaOcurrencia` exacta es sensible; ambos se vuelven públicos sólo cuando se generalizan (colonia en vez de coordenada, mes en vez de marca de tiempo exacta).
 
-- Autenticación.
-- Acceso mediante roles.
-- Cifrado de conexiones.
-- Cifrado de almacenamiento.
-- Respaldos protegidos.
-- Auditoría.
-- Publicación de resultados agregados.
+**Minimización, generalización y enmascaramiento.** `scripts/salida_protegida_rol_consulta.js` crea la vista `vista_publica_delitos`, que excluye `_id` y `ubicacion`, generaliza la fecha a `"año-mes"` y entrega sólo conteos agregados por clasificación, colonia y periodo. Nunca expone un documento individual.
+
+**Matriz de roles y privilegio mínimo.** `scripts/seguridad_roles_acceso.js` define cuatro roles sin herencia entre sí:
+
+| Rol | Puede leer datos crudos | Puede escribir | Puede administrar índices |
+|---|---|---|---|
+| `rol_lectura_publica` | No, sólo la vista agregada | No | No |
+| `rol_analista_interno` | Sí | No | No |
+| `rol_carga_datos` | Sí (para verificar) | Sólo inserción | No |
+| `rol_administrador_indices` | No | No | Sí |
+
+**Credenciales fuera del código.** Ningún script contiene usuarios ni contraseñas. La conexión de desarrollo es local y sin credenciales (`mongodb://127.0.0.1:27017`); las contraseñas de prueba se leen desde variables de entorno (`PASSWORD_ANALISTA`, `PASSWORD_LECTURA`) definidas fuera del repositorio.
+
+**Rol diseñado frente a denegación comprobada.** El servidor usado en el desarrollo no tiene `security.authorization: enabled`. Por eso los cuatro roles están **diseñados y son verificables** (`getRoles({ showPrivileges: true })`), pero la **denegación real** de una operación fuera de privilegio sólo se considera comprobada si el script detecta autenticación activa y captura el error `not authorized` correspondiente; si no la detecta, lo documenta explícitamente en lugar de asumirlo. El resultado de esa comprobación está en `resultados/seguridad_roles_acceso.txt`.
+
+Para un ambiente de producción se recomienda además:
+
+- Autenticación obligatoria.
+- Cifrado de conexiones (TLS) y de almacenamiento.
+- Un gestor de secretos (por ejemplo, AWS Secrets Manager) en vez de variables de entorno sueltas.
+- Respaldos protegidos y pruebas de restauración.
+- Auditoría y monitoreo de accesos.
 
 No deben almacenarse contraseñas, llaves privadas ni cadenas de conexión con credenciales dentro del repositorio.
 
@@ -385,6 +428,24 @@ No deben almacenarse contraseñas, llaves privadas ni cadenas de conexión con c
 - Existen documentos sin coordenadas.
 - Algunas coordenadas parecen representar puntos generales compartidos.
 - Las concentraciones observadas no demuestran relaciones causales.
+
+## Reporte final entregable
+
+El reporte de 4 a 6 páginas que exige la guía de las semanas 4-5 se genera con:
+
+```bash
+python scripts/generar_reporte_final.py
+```
+
+Esto produce `monkeydata_proyecto_nosql.pdf` en la raíz del repositorio, con las cinco secciones exigidas (portada, problema y datos, implementación, análisis especializado, seguridad y cierre) construidas a partir de la evidencia real conservada en `documentacion/` y `resultados/`.
+
+El reporte necesita tres capturas de pantalla reales, marcadas dentro del PDF con un recuadro amarillo mientras no existan:
+
+1. La consulta principal (`explain()` de la consulta A antes y después del índice).
+2. El análisis especializado (resultado geoespacial de 9,513 registros).
+3. Evidencia de índice, validación o protección (comparación de la vista `vista_publica_delitos` o el diagnóstico de roles).
+
+Para insertarlas, guarda las imágenes como `capturas_reporte/figura_1.png`, `figura_2.png` y `figura_3.png` en la raíz del proyecto y vuelve a ejecutar el script: sustituye automáticamente cada recuadro por la imagen correspondiente.
 
 ## Uso académico
 

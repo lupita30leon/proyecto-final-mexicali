@@ -128,7 +128,25 @@ ejecutar_mongo \
   resultados/analisis_temporal.txt
 
 echo
-echo "15. Ejecutando la comprobación final"
+echo "15. Ejecutando la búsqueda de lugares por patrón"
+ejecutar_mongo \
+  scripts/busqueda_lugares.js \
+  resultados/busqueda_lugares.txt
+
+echo
+echo "16. Generando la salida protegida para el rol de consulta"
+ejecutar_mongo \
+  scripts/salida_protegida_rol_consulta.js \
+  resultados/salida_protegida_rol_consulta.txt
+
+echo
+echo "17. Diseñando roles y comprobando el control de acceso"
+ejecutar_mongo \
+  scripts/seguridad_roles_acceso.js \
+  resultados/seguridad_roles_acceso.txt
+
+echo
+echo "18. Ejecutando la comprobación final"
 ejecutar_mongo \
   scripts/evidencia_final.js \
   resultados/evidencia_final.txt

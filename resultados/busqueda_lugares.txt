@@ -1,0 +1,19 @@
+[PEGAR AQUÍ LA SALIDA REAL]
+
+Este archivo debe reemplazarse por la salida real de ejecutar, dentro de
+AWS Academy Learner Lab:
+
+    mongosh "$(mongodb_database_url)" --quiet scripts/busqueda_lugares.js \
+      | tee resultados/busqueda_lugares.txt
+
+Qué debe mostrar el resultado pegado aquí:
+
+1. Caso 1 (/^VALLE/i): etapa principal del plan, totalKeysExamined,
+   totalDocsExamined, nReturned, y la lista de lugares distintos que
+   coinciden.
+2. Caso 2 (/PEDREGAL/i): las mismas métricas, para comparar el costo
+   frente al caso 1.
+3. Caso 3: hasta 5 registros de robo de vehículo en lugares que
+   contienen "PEDREGAL", ordenados por fecha descendente.
+4. Caso 4: la comprobación de que un patrón inexistente devuelve 0
+   coincidencias.

@@ -2,7 +2,7 @@
 
 ## Alcance de la revisión
 
-Esta matriz compara los elementos del proyecto con las guías de avance de las semanas 2 y 3.
+Esta matriz compara los elementos del proyecto con las guías de avance de las semanas 2 a 5.
 
 La revisión considera:
 
@@ -135,8 +135,45 @@ Antes de distribuir la fuente fuera del proyecto debe verificarse en la ficha or
 
 Estas observaciones no afectan la ejecución técnica, pero sí deben resolverse antes de una publicación externa de los datos.
 
+## Semana 4: análisis temporal
+
+| Requisito | Estado | Evidencia |
+|---|---|---|
+| Fechas BSON Date con significado, granularidad y zona horaria | Cumplido con limitación documentada | `fechaRegistro` y `fechaOcurrencia` son BSON Date; la zona horaria no se confirmó contra una fuente oficial, y esa limitación se documenta explícitamente en `documentacion/06_analisis_temporal.md` |
+| Consulta por intervalo `[inicio, fin)` | Cumplido | Los filtros de las consultas A y B en `documentacion/03_indices_rendimiento.md` usan `$gte`/`$lt` |
+| Índice acorde con la consulta por intervalo | Cumplido | `idx_clasificacion_fecha_id` e `idx_lugar_fecha_id` incluyen `fechaOcurrencia` como parte del patrón de claves |
+| Pipeline por periodo con indicador interpretable | Cumplido | Registros por mes, por día de la semana y cobertura mensual de 2024 en `scripts/analisis_temporal.js` |
+| Prueba con fechas conocidas y conclusión breve | Cumplido | La cobertura temporal (primera y última fecha) se contrasta contra el rango esperado (2014-01-01 a 2024-09-30) en `scripts/analisis_temporal.js` y se reafirma en `scripts/evidencia_final.js` |
+
+## Semana 5: búsqueda, seguridad y privacidad
+
+| Requisito | Estado | Evidencia |
+|---|---|---|
+| Decisión entre `$text` y `$regex`, con prueba de coincidencias y exclusiones | Cumplido | `documentacion/10_busqueda.md` y `scripts/busqueda_lugares.js`; incluye un caso de exclusión sin coincidencias |
+| Clasificación de datos: públicos, internos o sensibles | Cumplido | Tabla por campo en `documentacion/07_seguridad_privacidad.md`, sección 1 |
+| Minimización, exclusión, generalización o enmascaramiento de campos | Cumplido | Vista `vista_publica_delitos` en `scripts/salida_protegida_rol_consulta.js`, documentada en la sección 2 de `07_seguridad_privacidad.md` |
+| Matriz de roles, operaciones y privilegio mínimo | Cumplido | Cuatro roles sin herencia en `scripts/seguridad_roles_acceso.js`, tabla en la sección 3 de `07_seguridad_privacidad.md` |
+| Credenciales fuera del código | Cumplido | Ningún script contiene usuarios ni contraseñas; las de prueba se leen de variables de entorno (sección 4) |
+| Cifrado en el entorno objetivo | Cumplido como análisis de brecha | Tabla laboratorio vs. entorno objetivo (AWS) en la sección 4 de `07_seguridad_privacidad.md`; el laboratorio en sí no cifra, y esa brecha se documenta en vez de ignorarse |
+| Distinción entre rol diseñado y denegación comprobada | Cumplido | Sección 5 de `07_seguridad_privacidad.md`; el script detecta si `security.authorization` está activo y sólo reporta denegación comprobada cuando la evidencia lo respalda |
+
+## Integración de todo el proyecto (semanas 1 a 5)
+
+| Elemento de la lista de integración | Estado | Evidencia |
+|---|---|---|
+| Carga o preparación de los datos | Cumplido | `scripts/preparar_csv.sh`, `scripts/cargar_mongodb.py` |
+| Consultas o pipelines principales | Cumplido | `scripts/consultas_funcionales.js`, `scripts/analisis_temporal.js`, `scripts/analisis_geoespacial.js` |
+| Validador con un caso válido y otro inválido | Cumplido | `scripts/probar_validador.js`, 2 válidos y 9 inválidos |
+| Índices con `getIndexes()` y `explain()` | Cumplido | `scripts/crear_indices.js`, `scripts/medicion_antes_indices.js`, `scripts/medicion_despues_indices.js` |
+| Componente especializado seleccionado | Cumplido | Análisis geoespacial, justificado sobre temporal y textual en `documentacion/00_planteamiento_problema.md` |
+| Salida protegida o minimizada para un rol de consulta | Cumplido | `scripts/salida_protegida_rol_consulta.js` y vista `vista_publica_delitos` |
+
+## Observación pendiente para esta auditoría
+
+Los scripts `scripts/busqueda_lugares.js`, `scripts/salida_protegida_rol_consulta.js` y `scripts/seguridad_roles_acceso.js` se agregaron sin acceso al servidor MongoDB del Learner Lab del equipo. Sus archivos de resultado (`resultados/busqueda_lugares.txt`, `resultados/salida_protegida_rol_consulta.txt`, `resultados/seguridad_roles_acceso.txt`) contienen marcadores `[PEGAR AQUÍ LA SALIDA REAL]` que deben reemplazarse por la salida real antes de la entrega. El resto de comprobaciones de esta tabla se basa en la lectura del código, no en una ejecución nueva.
+
 ## Conclusión de la auditoría
 
-Los requisitos técnicos y documentales indicados en las guías de las semanas 2 y 3 se encuentran cubiertos mediante scripts, resultados y documentación reproducibles.
+Los requisitos técnicos y documentales indicados en las guías de las semanas 2 a 5 se encuentran cubiertos mediante scripts, resultados y documentación reproducibles, con la salvedad señalada arriba sobre los tres scripts añadidos más recientemente.
 
 La evidencia no se limita a capturas de pantalla: cada consulta, índice, regla y prueba cuenta con un archivo ejecutable y una salida conservada en el repositorio.

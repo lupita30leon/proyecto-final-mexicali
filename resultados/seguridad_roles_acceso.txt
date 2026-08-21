@@ -1,0 +1,29 @@
+[PEGAR AQUÍ LA SALIDA REAL]
+
+Este archivo debe reemplazarse por la salida real de ejecutar, dentro de
+AWS Academy Learner Lab:
+
+    mongosh "$(mongodb_database_url)" --quiet scripts/seguridad_roles_acceso.js \
+      | tee resultados/seguridad_roles_acceso.txt
+
+Qué debe mostrar el resultado pegado aquí:
+
+1. El diagnóstico de si "security.authorization" está en "enabled" en el
+   servidor usado.
+2. Los cuatro roles creados (rol_lectura_publica, rol_analista_interno,
+   rol_carga_datos, rol_administrador_indices) con sus privilegios,
+   obtenidos mediante curso.getRoles({ showPrivileges: true }).
+3. Si se definieron las variables de entorno PASSWORD_ANALISTA y
+   PASSWORD_LECTURA antes de ejecutar el script:
+   - Si el servidor NO tiene autenticación activa (caso esperado en el
+     Learner Lab): el aviso explícito de que los roles quedaron
+     diseñados pero no exigibles.
+   - Si el equipo habilitó "security.authorization: enabled" en un
+     servidor de prueba propio: la comprobación real de que el usuario
+     de sólo lectura pudo hacer find() sobre vista_publica_delitos pero
+     NO pudo hacer insertOne() sobre delitos_mexicali (mensaje de error
+     "not authorized on m6_nosql to execute command ...").
+
+No pegar aquí ninguna contraseña real, aunque sea temporal. Las
+variables de entorno usadas para la prueba deben ser valores de un solo
+uso y no deben reutilizarse en ningún otro sistema.

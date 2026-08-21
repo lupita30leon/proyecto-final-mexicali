@@ -1,0 +1,25 @@
+[PEGAR AQUÍ LA SALIDA REAL]
+
+Este archivo debe reemplazarse por la salida real de ejecutar, dentro de
+AWS Academy Learner Lab:
+
+    mongosh "$(mongodb_database_url)" --quiet scripts/salida_protegida_rol_consulta.js \
+      | tee resultados/salida_protegida_rol_consulta.txt
+
+Qué debe mostrar el resultado pegado aquí:
+
+1. Un documento crudo de MIRASOL con _id, fecha exacta y coordenadas
+   GeoJSON completas (nivel interno).
+2. La confirmación de creación de la vista "vista_publica_delitos".
+3. La fila equivalente dentro de la vista protegida: sin _id, con la
+   fecha generalizada a "año-mes" y sin coordenadas, mostrando en su
+   lugar sólo el nombre de colonia y un conteo agregado.
+4. La comparación explícita campo por campo (documento crudo vs. vista
+   protegida) que produce el paso 4 del script.
+5. La comprobación automática de que la vista no expone _id, ubicacion,
+   fechaOcurrencia ni fechaRegistro.
+6. Una muestra de 5 filas de la vista para el rol de consulta.
+
+Esta salida es la evidencia directa del punto 6 de la lista de
+integración de la guía de semanas 4-5: "salida protegida o minimizada
+para un rol de consulta".

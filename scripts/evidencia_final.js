@@ -105,6 +105,24 @@ var totalRobosVehiculoCincoKm =
     ? robosVehiculoCincoKm[0].totalRegistros
     : 0;
 
+var vistaProtegidaExiste =
+  curso.getCollectionInfos({ name: "vista_publica_delitos" }).length === 1;
+
+var nombresRoles = curso.getRoles().map(function (rol) {
+  return rol.role;
+});
+
+var rolesEsperados = [
+  "rol_lectura_publica",
+  "rol_analista_interno",
+  "rol_carga_datos",
+  "rol_administrador_indices"
+];
+
+var todosLosRolesDefinidos = rolesEsperados.every(function (rol) {
+  return nombresRoles.indexOf(rol) !== -1;
+});
+
 function contieneJsonSchema(validador) {
   if (!validador) {
     return false;
@@ -177,6 +195,15 @@ var comprobaciones = [
   {
     comprobacion: "Hay 9513 robos de vehículo dentro de cinco kilómetros",
     cumple: totalRobosVehiculoCincoKm === 9513
+  },
+  {
+    comprobacion: "Existe la vista protegida vista_publica_delitos",
+    cumple: vistaProtegidaExiste
+  },
+  {
+    comprobacion:
+      "Los cuatro roles de privilegio mínimo están definidos",
+    cumple: todosLosRolesDefinidos
   }
 ];
 
