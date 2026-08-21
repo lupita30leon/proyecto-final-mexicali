@@ -116,8 +116,7 @@ proyecto-final-mexicali/
 │   ├── 06_analisis_temporal.md
 │   ├── 07_seguridad_privacidad.md
 │   ├── 08_conclusiones.md
-│   ├── 09_verificacion_guias.md
-│   └── 10_busqueda.md
+│   └── 09_busqueda.md
 ├── resultados/
 │   ├── preparacion_csv.txt
 │   ├── carga_mongodb.txt
@@ -341,7 +340,7 @@ El año 2024 contiene solamente información hasta septiembre, por lo que no rep
 
 ## Búsqueda de lugares
 
-Se implementó búsqueda estructurada con `$regex` sobre `lugar.nombre`, en lugar de `$text`, porque el campo es un nombre propio corto (una colonia o fraccionamiento) y no texto libre. El detalle de la justificación está en [Búsqueda](documentacion/10_busqueda.md).
+Se implementó búsqueda estructurada con `$regex` sobre `lugar.nombre`, en lugar de `$text`, porque el campo es un nombre propio corto (una colonia o fraccionamiento) y no texto libre. El detalle de la justificación está en [Búsqueda](documentacion/09_busqueda.md).
 
 La evidencia real (no sólo teórica) mostró algo que vale la pena señalar: ni el patrón anclado ni el patrón sin anclar logran acotar `totalKeysExamined` al usar la bandera `i` (insensible a mayúsculas), porque esa bandera le impide al planificador calcular un rango de índice. Ambos casos recorren prácticamente el índice completo (175,463 llaves); la diferencia real está en cuántos documentos requieren `FETCH` después.
 
