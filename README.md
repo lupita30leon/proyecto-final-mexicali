@@ -99,6 +99,11 @@ Colección: delitos_mexicali
 
 ```text
 proyecto-final-mexicali/
+├── capturas_reporte/
+│   ├── figura_4_indices.png
+│   ├── figura_5_geoespacial.png
+│   ├── figura_6_vista_protegida.png
+│   └── figura_7_resultado.png
 ├── datos/
 │   └── crimes_mxl.csv
 ├── documentacion/
@@ -168,17 +173,12 @@ source ~/m6-nosql/setup/lib/mongodb_local.sh
 mongodb_iniciar
 ```
 
-Para clonar este repositorio, la forma más simple en una instancia nueva del Learner Lab es HTTPS (no requiere configurar una llave SSH):
+Para clonar el repositorio:
 
 ```bash
-cd ~
 git clone https://github.com/lupita30leon/proyecto-final-mexicali.git
 cd proyecto-final-mexicali
 ```
-
-Para hacer `git push` desde ahí, GitHub ya no acepta la contraseña de la cuenta como autenticación por HTTPS: hace falta un *personal access token* (`github.com/settings/tokens` → **Generate new token (classic)** → scope `repo`), que se usa como contraseña cuando `git push` lo solicite.
-
-Si prefieren SSH, la instancia necesita tener una llave SSH propia registrada en GitHub; una instancia nueva del Learner Lab no la trae por defecto.
 
 ## Ejecución completa
 
@@ -437,9 +437,12 @@ No deben almacenarse contraseñas, llaves privadas ni cadenas de conexión con c
 
 ## Reporte final entregable
 
-El reporte de 4 a 6 páginas que exige la guía de las semanas 4-5 es `monkeydata_proyecto_nosql.pdf`, en la raíz del repositorio. Cubre las 12 secciones del reporte (resumen ejecutivo, planteamiento, fuente y preparación, modelo documental, resultados funcionales, índices y rendimiento, validación y calidad, análisis temporal, análisis geoespacial, seguridad y privacidad, reproducibilidad, limitaciones y conclusiones) e incluye las tres figuras reales del proyecto (clasificaciones más frecuentes, registros por año, distribución por día y mes) embebidas como imágenes; no requiere capturas de pantalla adicionales para entregarse.
+El reporte de 4 a 6 páginas que exige la guía de las semanas 4-5 es `monkeydata_proyecto_nosql.pdf`, en la raíz del repositorio. Cubre las 12 secciones del reporte (resumen ejecutivo, planteamiento, fuente y preparación, modelo documental, resultados funcionales, índices y rendimiento, validación y calidad, análisis temporal, análisis geoespacial, seguridad y privacidad, reproducibilidad, limitaciones y conclusiones) e incluye:
 
-El documento fuente editable (Word) se conserva fuera del repositorio, con el equipo.
+- Tres figuras de los datos (clasificaciones más frecuentes, registros por año, distribución por día y mes), embebidas como imágenes.
+- Cuatro capturas reales de ejecución en AWS Academy Learner Lab, en la subsección "Evidencia de ejecución" (sección 10, Reproducibilidad): el índice cubierto de la consulta A (`IXSCAN`, 0 documentos, 20 llaves), el resultado geoespacial (9,513 registros), la comparación entre el documento crudo y la vista protegida `vista_publica_delitos`, y la comprobación final (13 de 13).
+
+No requiere capturas adicionales para entregarse.
 
 ## Uso académico
 

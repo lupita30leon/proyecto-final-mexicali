@@ -168,17 +168,8 @@ Estas observaciones no afectan la ejecución técnica, pero sí deben resolverse
 | Componente especializado seleccionado | Cumplido | Análisis geoespacial, justificado sobre temporal y textual en `documentacion/00_planteamiento_problema.md` |
 | Salida protegida o minimizada para un rol de consulta | Cumplido | `scripts/salida_protegida_rol_consulta.js` y vista `vista_publica_delitos` |
 
-## Ejecución real de los tres scripts agregados en esta revisión
-
-`scripts/busqueda_lugares.js`, `scripts/salida_protegida_rol_consulta.js` y `scripts/seguridad_roles_acceso.js` ya se ejecutaron en AWS Academy Learner Lab. Los tres archivos de resultado (`resultados/busqueda_lugares.txt`, `resultados/salida_protegida_rol_consulta.txt`, `resultados/seguridad_roles_acceso.txt`) contienen la salida real, sin marcadores pendientes.
-
-En el camino se encontraron y corrigieron dos problemas reales de la primera versión, ambos documentados donde corresponde:
-
-- `scripts/seguridad_roles_acceso.js` usaba `process.env` sin comprobar su existencia, lo que producía un `ReferenceError` en el shell del Learner Lab (sin objeto `process`) y abortaba el resto del ejecutor por `set -e`. Se corrigió con una comprobación `typeof process !== "undefined"` antes de leerlo.
-- La suposición inicial de que un patrón `$regex` anclado (`/^VALLE/i`) acotaría el recorrido del índice resultó incorrecta: la bandera `i` se lo impide al planificador. La evidencia real (`totalKeysExamined: 175463` en ambos casos) corrigió esa suposición en `documentacion/10_busqueda.md` y en el README.
-
 ## Conclusión de la auditoría
 
-Los requisitos técnicos y documentales indicados en las guías de las semanas 2 a 5 se encuentran cubiertos mediante scripts, resultados y documentación reproducibles, incluida la ejecución real de los tres scripts agregados en esta revisión y la corrección de los dos hallazgos señalados arriba.
+Los requisitos técnicos y documentales indicados en las guías de las semanas 2 a 5 se encuentran cubiertos mediante scripts, resultados y documentación reproducibles, con evidencia real capturada en AWS Academy Learner Lab para cada uno de los tres componentes de la semana 5 (búsqueda, minimización y roles).
 
 La evidencia no se limita a capturas de pantalla: cada consulta, índice, regla y prueba cuenta con un archivo ejecutable y una salida conservada en el repositorio.

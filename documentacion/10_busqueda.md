@@ -10,7 +10,7 @@ En este proyecto la búsqueda **sí es pertinente**, pero sobre un campo que no 
 2. **El caso de uso real es una coincidencia parcial o de mayúsculas/minúsculas, no una búsqueda semántica.** La persona usuaria (personal de análisis territorial) normalmente recuerda sólo una parte del nombre de la colonia. Un patrón `/PEDREGAL/i` resuelve directamente ese caso; `$text` requeriría que la palabra completa coincidiera con un token indexado.
 3. **`$text` exige un índice de texto adicional** (`db.delitos_mexicali.createIndex({ "lugar.nombre": "text" })`) que compite en almacenamiento y mantenimiento con los índices ya justificados en `documentacion/03_indices_rendimiento.md`, sin aportar una capacidad que el caso de uso realmente necesite.
 
-Por lo tanto, la búsqueda se implementó con `$regex`. La comparación de costo entre patrones no se dejó como una afirmación teórica: se comprobó con `explain("executionStats")` sobre datos reales, y el resultado obligó a corregir una suposición inicial (ver "Hallazgo real" más abajo).
+Por lo tanto, la búsqueda se implementó con `$regex`. La comparación de costo entre patrones no se dejó como una afirmación teórica: se comprobó con `explain("executionStats")` sobre los 175,482 documentos reales (ver "Costo real de cada patrón" más abajo).
 
 ## Implementación
 
@@ -40,9 +40,9 @@ delitos.find({ "lugar.nombre": /ZZZZ_COLONIA_INEXISTENTE/i })
 
 Comprueba que un patrón que no existe en la fuente devuelve cero documentos, no un error ni un resultado vacío por accidente de sintaxis.
 
-## Hallazgo real: la suposición inicial sobre el prefijo anclado era incorrecta
+## Costo real de cada patrón
 
-Antes de ejecutar el script contra los 175,482 documentos reales, se asumió que `/^VALLE/i` acotaría el recorrido del índice `idx_lugar_fecha_id` a sólo las entradas que empiezan con "VALLE", igual que una condición de rango. La evidencia real (`resultados/busqueda_lugares.txt`) contradice esa suposición:
+Un prefijo anclado (`^`) podría, en teoría, acotar el recorrido del índice `idx_lugar_fecha_id` a sólo las entradas que empiezan con "VALLE", igual que una condición de rango. La evidencia real (`resultados/busqueda_lugares.txt`) muestra que esto no ocurre así en este caso:
 
 | Caso | Patrón | Etapas del plan | totalKeysExamined | totalDocsExamined | nReturned |
 |---|---|---|---:|---:|---:|
@@ -53,7 +53,7 @@ Los dos casos examinan prácticamente **el mismo número de llaves** (175,463, c
 
 Esto no significa que el índice no sirva aquí. La diferencia real entre los dos casos está en `totalDocsExamined`: MongoDB evalúa el patrón contra el valor ya indexado (sin abrir el documento) para las 175,463 entradas, y sólo ejecuta `FETCH` sobre los documentos que efectivamente coinciden (10,297 y 3,605 respectivamente). Frente a un `COLLSCAN` puro, que habría abierto los 175,482 documentos completos para evaluar el patrón en cada uno, esto sigue siendo una reducción real de trabajo, aunque no sea la reducción "por rango" que se esperaba inicialmente para el caso anclado.
 
-**Conclusión corregida:** con `$regex` insensible a mayúsculas, ni el patrón anclado ni el patrón sin anclar logran acotar `totalKeysExamined`; ambos dependen del índice para evitar `FETCH` sobre documentos que no coinciden, no para reducir el recorrido de llaves. Acotar el recorrido por rango sólo sería posible con un patrón anclado **sensible** a mayúsculas y minúsculas (sin la bandera `i`), lo cual no encaja con el caso de uso real de este proyecto.
+**Conclusión:** con `$regex` insensible a mayúsculas, ni el patrón anclado ni el patrón sin anclar logran acotar `totalKeysExamined`; ambos dependen del índice para evitar `FETCH` sobre documentos que no coinciden, no para reducir el recorrido de llaves. Acotar el recorrido por rango sólo sería posible con un patrón anclado **sensible** a mayúsculas y minúsculas (sin la bandera `i`), lo cual no encaja con el caso de uso real de este proyecto.
 
 ## Resultado esperado
 
@@ -69,5 +69,5 @@ La salida completa, incluyendo las etapas del plan (`explain`) y las llaves/docu
 ## Limitaciones
 
 - La búsqueda no corrige errores ortográficos ni acentos; sólo empareja el patrón literal (con la bandera `i` para ignorar mayúsculas y minúsculas). La fuente real contiene numerosas variantes ortográficas del mismo nombre de colonia (por ejemplo, "PEDREGAL" aparece mal escrito como "PEDRFEGAL" o "PEDRREGAL"), que un `$regex` exacto no captura; resolverlo requeriría normalización adicional o búsqueda difusa, fuera del alcance de este proyecto.
-- Ni el patrón anclado ni el sin anclar acotan `totalKeysExamined` en este proyecto, por la bandera `i` (ver "Hallazgo real"); el costo de ambos crece de forma similar con el tamaño de la colección.
+- Ni el patrón anclado ni el sin anclar acotan `totalKeysExamined` en este proyecto, por la bandera `i` (ver "Costo real de cada patrón"); el costo de ambos crece de forma similar con el tamaño de la colección.
 - No se implementó `$text` en esta versión del proyecto porque el campo analizado no es texto libre, según se justifica arriba. Si el proyecto incorporara en el futuro un campo narrativo (por ejemplo, una descripción libre del incidente), `$text` volvería a ser la opción pertinente y debería revisarse en ese momento.

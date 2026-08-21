@@ -8,7 +8,7 @@ La solución se ejecuta con MongoDB Community dentro de AWS Academy Learner Lab.
 127.0.0.1:27017
 ```
 
-La base no se expone directamente a Internet. Los scripts y la documentación se almacenan en el repositorio compartido del equipo.
+La base no se expone directamente a Internet. Los scripts y la documentación se almacenan en el repositorio del proyecto.
 
 ## Información contenida
 
@@ -117,9 +117,7 @@ export PASSWORD_LECTURA="valor-temporal-solo-para-la-prueba"
 mongosh "$(mongodb_database_url)" --quiet scripts/seguridad_roles_acceso.js
 ```
 
-Si esas variables no están definidas, el script diseña los roles pero **no** crea usuarios, para no dejar cuentas con contraseñas vacías o previsibles como efecto colateral de una ejecución de prueba.
-
-En la ejecución real del equipo, el shell del Learner Lab no expone `process.env` (comportamiento típico del shell `mongo` clásico, a diferencia de `mongosh` sobre Node.js). El script comprueba `typeof process !== "undefined"` antes de leerlo, así que en ese caso simplemente informa que no puede leer variables de entorno y continúa sin crear usuarios, en vez de fallar. El resultado práctico es el mismo que si las variables no estuvieran definidas: los cuatro roles quedan diseñados y verificables, sin usuarios de prueba.
+Si esas variables no están definidas —o si el shell utilizado no expone variables de entorno de Node, como ocurre en el shell `mongo` clásico— el script diseña los roles pero **no** crea usuarios, para no dejar cuentas con contraseñas vacías o previsibles como efecto colateral de una ejecución de prueba. En ese caso, los cuatro roles quedan diseñados y verificables, sin usuarios de prueba.
 
 El repositorio no debe contener, bajo ninguna circunstancia:
 

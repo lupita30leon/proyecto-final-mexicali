@@ -107,11 +107,17 @@ Se ejecutaron once casos de prueba. Dos documentos válidos fueron aceptados y n
 
 Los campos `lugar.nombre`, `lugar.tipo` y `ubicacion` se conservaron como opcionales debido a que existen documentos reales donde esos valores no están disponibles.
 
+## Búsqueda de lugares
+
+Se implementó una búsqueda estructurada con `$regex` sobre `lugar.nombre`, en lugar de `$text`, porque el campo contiene nombres propios cortos de colonias y fraccionamientos, no texto libre. La evidencia real mostró que, con una expresión insensible a mayúsculas, ni un patrón anclado ni uno sin anclar acotan el recorrido del índice; ambos dependen de él para evitar abrir documentos que no coinciden, no para reducir las llaves examinadas.
+
 ## Seguridad y privacidad
 
 Aunque la base no contiene nombres, teléfonos, correos electrónicos u otros identificadores personales directos, la información geográfica y delictiva puede ser sensible.
 
-En un entorno de producción sería necesario implementar autenticación, autorización por roles, conexiones cifradas, cifrado de almacenamiento, respaldos protegidos y registros de auditoría.
+Cada campo se clasificó como público, interno o sensible, distinguiendo el registro individual del dato ya agregado. Sobre esa clasificación se construyó una vista, `vista_publica_delitos`, que excluye `_id` y `ubicacion` y generaliza la fecha a año-mes, entregando sólo conteos agregados. Se definieron además cuatro roles de privilegio mínimo (lectura pública, analista interno, carga de datos y administración de índices), verificables mediante `getRoles()`. Como el servidor de desarrollo no tiene autenticación activa, la denegación real de privilegios no se dio por hecha: se distingue explícitamente entre un rol diseñado y una denegación comprobada.
+
+Para un entorno de producción sería necesario además cifrado de conexiones y de almacenamiento, un gestor de secretos, respaldos protegidos y registros de auditoría.
 
 También se recomienda compartir resultados agregados y evitar publicar ubicaciones exactas cuando puedan generar riesgos para personas, viviendas o establecimientos.
 
@@ -136,6 +142,6 @@ MongoDB fue adecuado para este proyecto porque permitió representar la informac
 
 Los índices compuestos redujeron considerablemente la cantidad de documentos examinados y el índice `2dsphere` permitió ejecutar consultas de proximidad.
 
-La validación mediante JSON Schema ayudó a proteger la estructura y calidad de la colección. Los análisis funcionales, temporales y geoespaciales demostraron que la base puede utilizarse para responder preguntas relevantes, siempre que los resultados se interpreten considerando la cobertura y las limitaciones de la fuente.
+La validación mediante JSON Schema ayudó a proteger la estructura y calidad de la colección. Los análisis funcionales, temporales, geoespaciales y de búsqueda demostraron que la base puede utilizarse para responder preguntas relevantes, siempre que los resultados se interpreten considerando la cobertura y las limitaciones de la fuente.
 
-El proyecto produjo una solución organizada, reproducible y documentada, con scripts independientes para preparación, carga, validación, consultas, optimización y análisis.
+El proyecto produjo una solución organizada, reproducible y documentada, con scripts independientes para preparación, carga, validación, consultas, optimización, búsqueda, protección de datos y análisis. La comprobación final automatizada (`scripts/evidencia_final.js`) verificó 13 de 13 condiciones sobre la colección reconstruida: documentos, índices, validador, resultado geoespacial, vista protegida y roles de privilegio mínimo.
