@@ -112,9 +112,9 @@ Los casos de control demostraron que:
 
 ## Reproducibilidad
 
-El archivo `scripts/ejecutar_proyecto.sh` reconstruye el proyecto en quince etapas.
+El archivo `scripts/ejecutar_proyecto.sh` reconstruye el proyecto en dieciocho etapas.
 
-El proceso parte de la fuente original y termina con once comprobaciones automáticas.
+El proceso parte de la fuente original y termina con trece comprobaciones automáticas, todas correctas en la última ejecución registrada en `resultados/evidencia_final.txt`.
 
 Para impedir una reconstrucción accidental, el ejecutor requiere:
 
@@ -168,12 +168,17 @@ Estas observaciones no afectan la ejecución técnica, pero sí deben resolverse
 | Componente especializado seleccionado | Cumplido | Análisis geoespacial, justificado sobre temporal y textual en `documentacion/00_planteamiento_problema.md` |
 | Salida protegida o minimizada para un rol de consulta | Cumplido | `scripts/salida_protegida_rol_consulta.js` y vista `vista_publica_delitos` |
 
-## Observación pendiente para esta auditoría
+## Ejecución real de los tres scripts agregados en esta revisión
 
-Los scripts `scripts/busqueda_lugares.js`, `scripts/salida_protegida_rol_consulta.js` y `scripts/seguridad_roles_acceso.js` se agregaron sin acceso al servidor MongoDB del Learner Lab del equipo. Sus archivos de resultado (`resultados/busqueda_lugares.txt`, `resultados/salida_protegida_rol_consulta.txt`, `resultados/seguridad_roles_acceso.txt`) contienen marcadores `[PEGAR AQUÍ LA SALIDA REAL]` que deben reemplazarse por la salida real antes de la entrega. El resto de comprobaciones de esta tabla se basa en la lectura del código, no en una ejecución nueva.
+`scripts/busqueda_lugares.js`, `scripts/salida_protegida_rol_consulta.js` y `scripts/seguridad_roles_acceso.js` ya se ejecutaron en AWS Academy Learner Lab. Los tres archivos de resultado (`resultados/busqueda_lugares.txt`, `resultados/salida_protegida_rol_consulta.txt`, `resultados/seguridad_roles_acceso.txt`) contienen la salida real, sin marcadores pendientes.
+
+En el camino se encontraron y corrigieron dos problemas reales de la primera versión, ambos documentados donde corresponde:
+
+- `scripts/seguridad_roles_acceso.js` usaba `process.env` sin comprobar su existencia, lo que producía un `ReferenceError` en el shell del Learner Lab (sin objeto `process`) y abortaba el resto del ejecutor por `set -e`. Se corrigió con una comprobación `typeof process !== "undefined"` antes de leerlo.
+- La suposición inicial de que un patrón `$regex` anclado (`/^VALLE/i`) acotaría el recorrido del índice resultó incorrecta: la bandera `i` se lo impide al planificador. La evidencia real (`totalKeysExamined: 175463` en ambos casos) corrigió esa suposición en `documentacion/10_busqueda.md` y en el README.
 
 ## Conclusión de la auditoría
 
-Los requisitos técnicos y documentales indicados en las guías de las semanas 2 a 5 se encuentran cubiertos mediante scripts, resultados y documentación reproducibles, con la salvedad señalada arriba sobre los tres scripts añadidos más recientemente.
+Los requisitos técnicos y documentales indicados en las guías de las semanas 2 a 5 se encuentran cubiertos mediante scripts, resultados y documentación reproducibles, incluida la ejecución real de los tres scripts agregados en esta revisión y la corrección de los dos hallazgos señalados arriba.
 
 La evidencia no se limita a capturas de pantalla: cada consulta, índice, regla y prueba cuenta con un archivo ejecutable y una salida conservada en el repositorio.

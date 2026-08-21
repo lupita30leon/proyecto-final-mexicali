@@ -128,7 +128,6 @@ proyecto-final-mexicali/
 │   ├── analisis_geoespacial.txt
 │   ├── pruebas_geograficas_adicionales.txt
 │   ├── analisis_temporal.txt
-│   ├── ejecucion_completa.txt
 │   ├── evidencia_final.txt
 │   ├── busqueda_lugares.txt
 │   ├── salida_protegida_rol_consulta.txt
@@ -154,6 +153,7 @@ proyecto-final-mexicali/
 │   ├── seguridad_roles_acceso.js
 │   └── ejecutar_proyecto.sh
 ├── .gitignore
+├── monkeydata_proyecto_nosql.pdf
 └── README.md
 ```
 
@@ -168,13 +168,17 @@ source ~/m6-nosql/setup/lib/mongodb_local.sh
 mongodb_iniciar
 ```
 
-Para clonar este repositorio mediante SSH:
+Para clonar este repositorio, la forma más simple en una instancia nueva del Learner Lab es HTTPS (no requiere configurar una llave SSH):
 
 ```bash
 cd ~
-git clone git@github.com:lupita30leon/proyecto-final-mexicali.git
+git clone https://github.com/lupita30leon/proyecto-final-mexicali.git
 cd proyecto-final-mexicali
 ```
+
+Para hacer `git push` desde ahí, GitHub ya no acepta la contraseña de la cuenta como autenticación por HTTPS: hace falta un *personal access token* (`github.com/settings/tokens` → **Generate new token (classic)** → scope `repo`), que se usa como contraseña cuando `git push` lo solicite.
+
+Si prefieren SSH, la instancia necesita tener una llave SSH propia registrada en GitHub; una instancia nueva del Learner Lab no la trae por defecto.
 
 ## Ejecución completa
 
@@ -363,16 +367,16 @@ El script `scripts/evidencia_final.js` comprueba automáticamente:
 - Existencia de la vista protegida `vista_publica_delitos`.
 - Existencia de los cuatro roles de privilegio mínimo.
 
-Resultado obtenido con las 11 comprobaciones originales (antes de agregar las dos comprobaciones de seguridad anteriores):
+Resultado real, obtenido en AWS Academy Learner Lab después de correr los 18 pasos del ejecutor (`resultados/evidencia_final.txt`):
 
 ```text
-Total de comprobaciones: 11
-Comprobaciones correctas: 11
+Total de comprobaciones: 13
+Comprobaciones correctas: 13
 Comprobaciones con falla: 0
 Resultado general: PROYECTO VERIFICADO CORRECTAMENTE
 ```
 
-**Pendiente:** este bloque debe volver a ejecutarse en el Learner Lab después de correr los pasos 15 a 17 del ejecutor, para reemplazarlo por el resultado real con 13 comprobaciones (`resultados/evidencia_final.txt`).
+Las dos comprobaciones nuevas frente a la primera versión son la existencia de la vista `vista_publica_delitos` y la existencia de los cuatro roles de privilegio mínimo.
 
 ## Documentación
 
@@ -433,21 +437,9 @@ No deben almacenarse contraseñas, llaves privadas ni cadenas de conexión con c
 
 ## Reporte final entregable
 
-El reporte de 4 a 6 páginas que exige la guía de las semanas 4-5 se genera con:
+El reporte de 4 a 6 páginas que exige la guía de las semanas 4-5 es `monkeydata_proyecto_nosql.pdf`, en la raíz del repositorio. Cubre las 12 secciones del reporte (resumen ejecutivo, planteamiento, fuente y preparación, modelo documental, resultados funcionales, índices y rendimiento, validación y calidad, análisis temporal, análisis geoespacial, seguridad y privacidad, reproducibilidad, limitaciones y conclusiones) e incluye las tres figuras reales del proyecto (clasificaciones más frecuentes, registros por año, distribución por día y mes) embebidas como imágenes; no requiere capturas de pantalla adicionales para entregarse.
 
-```bash
-python scripts/generar_reporte_final.py
-```
-
-Esto produce `monkeydata_proyecto_nosql.pdf` en la raíz del repositorio, con las cinco secciones exigidas (portada, problema y datos, implementación, análisis especializado, seguridad y cierre) construidas a partir de la evidencia real conservada en `documentacion/` y `resultados/`.
-
-El reporte necesita tres capturas de pantalla reales, marcadas dentro del PDF con un recuadro amarillo mientras no existan:
-
-1. La consulta principal (`explain()` de la consulta A antes y después del índice).
-2. El análisis especializado (resultado geoespacial de 9,513 registros).
-3. Evidencia de índice, validación o protección (comparación de la vista `vista_publica_delitos` o el diagnóstico de roles).
-
-Para insertarlas, guarda las imágenes como `capturas_reporte/figura_1.png`, `figura_2.png` y `figura_3.png` en la raíz del proyecto y vuelve a ejecutar el script: sustituye automáticamente cada recuadro por la imagen correspondiente.
+El documento fuente editable (Word) se conserva fuera del repositorio, con el equipo.
 
 ## Uso académico
 
