@@ -435,14 +435,12 @@ No deben almacenarse contraseñas, llaves privadas ni cadenas de conexión con c
 - Algunas coordenadas parecen representar puntos generales compartidos.
 - Las concentraciones observadas no demuestran relaciones causales.
 
-## Reporte final entregable
+## Reporte final
 
-El reporte de 4 a 6 páginas que exige la guía de las semanas 4-5 es `monkeydata_proyecto_nosql.pdf`, en la raíz del repositorio. Cubre las 12 secciones del reporte (resumen ejecutivo, planteamiento, fuente y preparación, modelo documental, resultados funcionales, índices y rendimiento, validación y calidad, análisis temporal, análisis geoespacial, seguridad y privacidad, reproducibilidad, limitaciones y conclusiones) e incluye:
+El reporte `monkeydata_proyecto_nosql.pdf`, cubre 12 secciones (resumen ejecutivo, planteamiento, fuente y preparación, modelo documental, resultados funcionales, índices y rendimiento, validación y calidad, análisis temporal, análisis geoespacial, seguridad y privacidad, reproducibilidad, limitaciones y conclusiones) e incluye:
 
-- Tres figuras de los datos (clasificaciones más frecuentes, registros por año, distribución por día y mes), embebidas como imágenes.
-- Cuatro capturas reales de ejecución en AWS Academy Learner Lab, en la subsección "Evidencia de ejecución" (sección 10, Reproducibilidad): el índice cubierto de la consulta A (`IXSCAN`, 0 documentos, 20 llaves), el resultado geoespacial (9,513 registros), la comparación entre el documento crudo y la vista protegida `vista_publica_delitos`, y la comprobación final (13 de 13).
-
-No requiere capturas adicionales para entregarse.
+- Figuras de los datos (clasificaciones más frecuentes, registros por año, distribución por día y mes), embebidas como imágenes.
+- Capturas reales de ejecución en AWS Academy Learner Lab: el índice cubierto de la consulta A (`IXSCAN`, 0 documentos, 20 llaves), el resultado geoespacial (9,513 registros), la comparación entre el documento crudo y la vista protegida `vista_publica_delitos`, y la comprobación final (13 de 13).
 
 ## Uso académico
 
