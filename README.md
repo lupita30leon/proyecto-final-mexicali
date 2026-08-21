@@ -391,8 +391,7 @@ La explicación detallada de cada etapa se encuentra en:
 - [Análisis temporal](documentacion/06_analisis_temporal.md)
 - [Seguridad y privacidad](documentacion/07_seguridad_privacidad.md)
 - [Conclusiones](documentacion/08_conclusiones.md)
-- [Verificación de las guías](documentacion/09_verificacion_guias.md)
-- [Búsqueda](documentacion/10_busqueda.md)
+- [Búsqueda](documentacion/09_busqueda.md)
 
 ## Seguridad y privacidad
 
