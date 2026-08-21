@@ -1,6 +1,6 @@
 # Planteamiento del problema
 
-## Título del proyecto
+## Proyecto final: análisis de delincuencia en Mexicali
 
 Análisis documental, temporal y geoespacial de registros delictivos de Mexicali mediante MongoDB.
 
